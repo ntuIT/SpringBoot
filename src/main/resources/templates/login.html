@@ -65,11 +65,11 @@
 </head>
 <body>
 
-<form class="box" action="/ivs/login" method="post">
+<form class="box" action="/admin/login" method="post">
     <h1>Login</h1>
-    <input type="text" name="" placeholder="Username">
-    <input type="password" name="" placeholder="Password">
-    <input type="submit" name="" value="Login">
+    <input type="text" th:name="email" placeholder="ID" />
+    <input type="password" th:name="password" th:placeholder="#{login.txtPassword}" />
+    <input type="submit" th:placeholder="#{login.btnLogin}" value="Login">
 </form>
 </body>
 </html>

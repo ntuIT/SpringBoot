@@ -17,10 +17,5 @@ public class WelcomeController {
         model.addAttribute("message", message);
         return "welcome";
     }
-    @GetMapping("/login")
-    public String loginPage(ModelMap model)
-    {
-        return "login";
-    }
 
 }
