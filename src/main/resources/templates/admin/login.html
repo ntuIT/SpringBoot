@@ -3,7 +3,7 @@
 <head th:fragment="head">
     <meta charset="utf-8">
     <title>َAnimated Login Form</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/login.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
     <style>
         body{
             margin: 0;
@@ -50,7 +50,7 @@
             display: block;
             margin: 20px auto;
             text-align: center;
-            border: 2px solid #2ecc71;
+            border: 2px solid #db028f;
             padding: 14px 40px;
             outline: none;
             color: white;
@@ -59,13 +59,13 @@
             cursor: pointer;
         }
         .box input[type = "submit"]:hover{
-            background: #2ecc71;
+            background: #04f7db;
         }
     </style>
 </head>
 <body>
 
-<form class="box" action="/admin/login" method="post">
+<form class="box" action="/admincp/login" method="post">
     <h1>Login</h1>
     <input type="text" th:name="email" th:placeholder="#{login.txtUser}" />
     <input type="password" th:name="password" th:placeholder="#{login.txtPassword}" />

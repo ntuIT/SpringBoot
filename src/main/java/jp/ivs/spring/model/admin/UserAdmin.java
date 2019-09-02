@@ -4,6 +4,7 @@ public class UserAdmin
 {
     String username, password, fullName;
 
+    //region Hàm Tạo ()
     public UserAdmin() { }
     public UserAdmin(String username, String password)
     {
@@ -15,6 +16,7 @@ public class UserAdmin
         this(username, password);
         this.setFullName(fullName);
     }
+    //endregion
     //region getter&setter
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
@@ -25,4 +27,5 @@ public class UserAdmin
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
     //endregion
+
 }
