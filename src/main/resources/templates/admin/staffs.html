@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="adminLayout :: head">-->
+<head>
+    <meta charset="UTF-8">
+    <!-- region Bootstrap Core -->
+    <link href="../../static/bootstrap/sb-admin/vendor/bootstrap/css/bootstrap.min.css"
+          th:href="@{/bootstrap/sb-admin/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../../static/bootstrap/sb-admin/vendor/metisMenu/metisMenu.min.css"
+          th:href="@{/bootstrap/sb-admin/vendor/metisMenu/metisMenu.min.css}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../static/bootstrap/sb-admin/dist/css/sb-admin-2.css"
+          th:href="@{/bootstrap/sb-admin/dist/css/sb-admin-2.css}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../../static/bootstrap/sb-admin/vendor/font-awesome/css/font-awesome.min.css"
+          th:href="@{/bootstrap/sb-admin/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <!endregion-->
+</head>
+<body>
+<!--    <nav th:replace="adminLayout :: header"></nav>-->
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><th:block th:text="#{caption.Staff}" /> </h1>
+        </div>
+        <label> </label>
+    </div>
+
+    <div class="row"><div class="col-lg-12">
+        <div class="panel panel-default">
+            <th:block th:if="${#lists.isEmpty(listStaffs)}">
+                <div class="panel-heading"><th:block th:text="#{caption.emptyList}"/></div>
+            </th:block>
+            <th:block th:unless="${#lists.isEmpty(listStaffs)}">
+                <div class="panel-heading"><th:block th:text="#{caption.List}"/></div>
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover">
+                        <thead><tr>
+                            <th th:text="#{caption.IndexonList}"></th>
+                            <th th:text="#{lb.empName}"></th>
+<!--                            <th>Employee No</th>-->
+                            <th>♀/♂</th>
+                            <th th:text="#{lb.birthDay}">Birthday</th>
+                            <th th:text="#{lb.emPhoto}">Photo</th>
+                            <th>Email</th>
+                            <th th:text="#{lb.contact}"></th>
+                            <th th:text="#{lb.Salary}">Salary</th>
+                            <th th:text="#{lb.empLevel}"></th>
+                            <th th:text="#{lb.Note}"></th>
+                            <th th:text="#{caption.Department}"></th>
+                        </tr></thead>
+                        <tbody>
+                        <tr th:each="staff, state : ${listStaffs}">
+                            <th scope="row" th:text="${state.count}"></th>
+                            <td th:text="${staff.getName()}"></td>
+                            <th:block th:if="${staff.getGender()}==true"><td th:text="#{lb.Male}"></td></th:block>
+                            <th:block th:if="${staff.getGender()}==false"><td th:text="#{lb.Female}"></td></th:block>
+                            <td th:text="${staff.getBirthday()}"></td>
+                            <td th:text="${staff.getPhoto()}"></td>
+                            <td th:text="${staff.getEmail()}"></td>
+                            <td th:text="${staff.getPhone()}"></td>
+                            <td th:text="${staff.getSalary()}"></td>
+                            <td th:text="${staff.getLevel()}"></td>
+                            <td th:text="${staff.getNotes()}"></td>
+                            <td th:text="${staff.getDepartName()}"></td>
+                            <td><a href="/admincp/dropStaff" th:text="#{btn.drop}" class="btn btn-danger" /></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </th:block>
+
+
+        </div>
+    </div></div>
+
+</div>
+
+<!-- region Js-->
+<script src="../../static/bootstrap/sb-admin/vendor/jquery/jquery.min.js"
+        th:src="@{/bootstrap/sb-admin/vendor/font-awesome/css/font-awesome.min.css}" ></script>
+
+
+<script src="../../static/bootstrap/sb-admin/vendor/bootstrap/js/bootstrap.min.js"
+        th:src="@{/bootstrap/sb-admin/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../../static/bootstrap/sb-admin/vendor/metisMenu/metisMenu.min.js"
+        th:src="@{/bootstrap/sb-admin/vendor/metisMenu/metisMenu.min.js}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../../static/bootstrap/sb-admin/dist/js/sb-admin-2.js"
+        th:src="@{/bootstrap/sb-admin/dist/js/sb-admin-2.js}"></script>
+<!--endregion-->
+
+</body>
+</html>

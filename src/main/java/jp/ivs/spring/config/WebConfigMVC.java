@@ -41,7 +41,7 @@ public class WebConfigMVC implements WebMvcConfigurer
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource
                 = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasenames("classpath:language/caption" /* , "classpath:validation" */);
+        messageSource.setBasenames("classpath:language/caption" , "classpath:language/element" );
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }

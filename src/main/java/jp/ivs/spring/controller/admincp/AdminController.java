@@ -1,7 +1,9 @@
 package jp.ivs.spring.controller.admincp;
 
 import jp.ivs.spring.mapper.DepartMapper;
+import jp.ivs.spring.mapper.EmployeeMapper;
 import jp.ivs.spring.model.admin.Department;
+import jp.ivs.spring.model.admin.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,10 +22,15 @@ public class AdminController
     UserMapper userMapper;
     @Autowired
     DepartMapper departMapper;
+    @Autowired
+    EmployeeMapper empMapper;
+
     @RequestMapping(value = "/")
     public String goToAdmin(ModelMap model)
     {
-        return "admin/adminLayout";
+        List<Department> list = departMapper.getAllDept();
+        model.addAttribute("listDeparts", list);
+        return "admin/welcome";
     }
 
     @RequestMapping(value = {"/loginPage"})
@@ -48,11 +55,13 @@ public class AdminController
         }
         return goToLogin(model);
     }
-    @RequestMapping(value = {"/depart"} , method = RequestMethod.GET)
-    public String departPage(ModelMap model)
+
+    @RequestMapping(value = {"/staff"})
+    public String staffsPage(ModelMap model)
     {
-        List<Department> list = departMapper.getAllDept();
-        model.addAttribute("listDepart", list);
-        return "depart";
+        List<Employee> list = empMapper.getAllStaffs();
+        model.addAttribute("listStaffs", list);
+        return "admin/staffs";
     }
+
 }

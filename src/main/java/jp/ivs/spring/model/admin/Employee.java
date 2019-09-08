@@ -2,8 +2,14 @@ package jp.ivs.spring.model.admin;
 
 public class Employee
 {
-    int id, departId;
-    String name, birthday, photo, email, phone, notes;
+    int id, departId, level;
+    String name;
+    String birthday;
+    String photo;
+    String email;
+    String phone;
+    String notes;
+    String departName;
     boolean gender;
     double salary;
 
@@ -15,6 +21,7 @@ public class Employee
         this.name = name;
     }
     public Employee( int departId
+            , String departName
             , String name
             , String birthday
             , String photo
@@ -22,9 +29,11 @@ public class Employee
             , String phone
             , String notes
             , boolean gender
+            , int level
             , double salary
     )   {
         this.departId = departId;
+        this.departName = departName;
         this.name = name;
         this.birthday = birthday;
         this.photo = photo;
@@ -32,6 +41,7 @@ public class Employee
         this.phone = phone;
         this.notes = notes;
         this.gender = gender;
+        this.level = level;
         this.salary = salary;
     }
     //endregion
@@ -64,7 +74,13 @@ public class Employee
     public boolean getGender() { return gender; }
     public void setGender(boolean gender) { this.gender = gender; }
 
+    public int getLevel() { return level; }
+    public void setLevel(int level) { this.level = level; }
+
     public double getSalary() { return salary; }
     public void setSalary(double salary) { this.salary = salary; }
+
+    public String getDepartName() { return departName; }
+    public void setDepartName(String departName) { this.departName = departName; }
     //endregion
 }
