@@ -56,12 +56,5 @@ public class AdminController
         return goToLogin(model);
     }
 
-    @RequestMapping(value = {"/staff"})
-    public String staffsPage(ModelMap model)
-    {
-        List<Employee> list = empMapper.getAllStaffs();
-        model.addAttribute("listStaffs", list);
-        return "admin/staffs";
-    }
 
 }

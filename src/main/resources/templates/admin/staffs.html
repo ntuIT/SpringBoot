@@ -33,7 +33,18 @@
         <div class="col-lg-12">
             <h1 class="page-header"><th:block th:text="#{caption.Staff}" /> </h1>
         </div>
-        <label> </label>
+        <form action="#" th:action="@{/adminp/staff}">
+        <input type="text" placeholder="Tên nhân viên" th:name="txtEmpName"/>
+        <button>Tìm kiếm</button>
+        <label> Phòng ban
+            <select th:name="department">
+                <option th:value="-1" th:text="--"/>
+                <th:block th:each="dept, state : ${listDepts}">
+                    <option th:value="${dept.getId()}" th:text="${dept.getName()}"/>
+                </th:block>
+            </select>
+        </label>
+        </form>
     </div>
 
     <div class="row"><div class="col-lg-12">
@@ -73,7 +84,8 @@
                             <td th:text="${staff.getLevel()}"></td>
                             <td th:text="${staff.getNotes()}"></td>
                             <td th:text="${staff.getDepartName()}"></td>
-                            <td><a href="/admincp/dropStaff" th:text="#{btn.drop}" class="btn btn-danger" /></td>
+                            <td><a href="/admincp/dropStaff" th:href="@{/admincp/dropStaff/(staffId=${staff.getId()})}"
+                                   th:text="#{btn.drop}" class="btn btn-danger" /></td>
                         </tr>
                         </tbody>
                     </table>

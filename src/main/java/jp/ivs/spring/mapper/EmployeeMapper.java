@@ -7,10 +7,16 @@ import java.util.List;
 
 public interface EmployeeMapper
 {
-    @Select(" SELECT s.Id , s.Name , s.Gender , s.Birthday , s.Photo , s.DepartId , s.Email , s.Level , s.Phone , s.Salary, s.Level , s.Notes , s.DepartId , d.Name as 'DepartName' FROM staffs s  join departs d on s.DepartId = d.Id; ")
+    @Select(" SELECT s.Id , s.Name , s.Gender , s.Birthday , s.Photo , s.DepartId , s.Email , s.Level , s.Phone , s.Salary, s.Level , s.Notes , s.DepartId , d.Name as 'DepartName' " +
+        " FROM staffs s  join departs d on s.DepartId = d.Id ORDER BY s.DepartId;  ")
     List<Employee> getAllStaffs();
-    @Select(" SELECT s.Id , s.Name , s.Gender , s.Birthday , s.Photo , s.DepartId , s.Email , s.Level , s.Phone , s.Salary, s.Level , s.Notes , s.DepartId , d.Name as 'DepartName' FROM staffs s  join departs d on s.DepartId = d.Id ORDER BY s.DepartId; ")
-    List<Employee> getStaffsListForDept();
+    @Select(" SELECT s.Id , s.Name , s.Gender , s.Birthday , s.Photo , s.DepartId , s.Email , s.Level , s.Phone , s.Salary, s.Level , s.Notes , s.DepartId , d.Name as 'DepartName' " +
+        " FROM staffs s  join departs d on s.DepartId = d.Id WHERE s.DepartId = #{deptId}; ")
+    List<Employee> getStaffsListForDept(int deptId);
+    @Select(" SELECT s.Id , s.Name , s.Gender , s.Birthday , s.Photo , s.DepartId , s.Email , s.Level , s.Phone , s.Salary, s.Level , s.Notes , s.DepartId , d.Name as 'DepartName' FROM staffs s  join departs d on s.DepartId = d.Id" +
+            " WHERE s.DepartId = #{deptId} AND s.Name LIKE '%#{staffName}%' ; ")
+    List<Employee> searchStaffsList(int deptId, String staffName);
+
     @Select(" SELECT * FROM Staffs s WHERE s.Id = #{staffNo} ")
     Employee get1StaffByNo(int staffNo);
     @Delete(" DELETE FROM Staffs WHERE Id = #{staffNo} ")
