@@ -42,12 +42,26 @@ public class StaffController
         redirect.addFlashAttribute("successMessage", "Success !");
         return "redirect:/admincp/staff";
     }
+    @RequestMapping(value = {"/addStaff"})
+    public String newStaffPForm(ModelMap model)
+    {
+        return "";
+    }
     @RequestMapping(value = {"/editStaff"})
     public String editForm(ModelMap model)
     {
         return "";
     }
 
+    @RequestMapping(value = {"/allStaff"})
+    public String allStaffsPage(ModelMap model)
+    {
+        List<Employee> listStaffs = empMapper.getAllStaffs();
+        List<Department> listDepts = deptMapper.getAllDept();
+        model.addAttribute("listStaffs", listStaffs);
+        model.addAttribute("listDepts", listDepts);
+        return "admin/staffs";
+    }
     @RequestMapping(value = {"/staff"})
     public String staffsPage(ModelMap model
     , @RequestParam("txtEmpName") String empName
