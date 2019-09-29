@@ -84,8 +84,12 @@
                             <td th:text="${staff.getLevel()}"></td>
                             <td th:text="${staff.getNotes()}"></td>
                             <td th:text="${staff.getDepartName()}"></td>
-                            <td><a href="/admincp/dropStaff" th:href="@{/admincp/dropStaff/(staffId=${staff.getId()})}"
-                                   th:text="#{btn.drop}" class="btn btn-danger" /></td>
+                            <td><form action="/admincp/dropForm">
+                                <input type="hidden" th:value="${staff.getId()}"/>
+                                <button th:text="#{btn.drop}" class="btn btn-danger"></button>
+                            </form></td>
+                                <!--<a href="/admincp/dropForm" th:href="@{/admincp/dropForm/(staffId=${staff.getId()})}"
+                                   th:text="#{btn.drop}" class="btn btn-danger" /> -->
                         </tr>
                         </tbody>
                     </table>
