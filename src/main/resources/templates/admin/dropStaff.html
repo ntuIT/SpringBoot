@@ -34,8 +34,9 @@
             <h1 class="page-header"><th:block th:text="#{caption.Staff}" /> </h1>
         </div>
         <div class="panel panel-default"><form action="#" th:action="@{/adminp/dropStaff}" th:method="DELETE">
-            <input type="text" th:name="staffNo" th:value="${staffNo}" />
-            <input type="password" th:name="userPass" placeholder="Nhập lại password" />
+            StaffNの: <input type="text" readonly="readonly" />
+            <input type="hidden" th:value="${staffNo}" th:name="staffNo" />
+            <br><input type="password" th:name="userPass" placeholder="Nhập lại password" />
             <button>Submit</button>
         </form></div>
     </div>
