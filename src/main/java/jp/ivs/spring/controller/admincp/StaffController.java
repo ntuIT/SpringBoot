@@ -42,15 +42,10 @@ public class StaffController
         redirect.addFlashAttribute("successMessage", "Success !");
         return "redirect:/admincp/staff";
     }
-    @RequestMapping(value = {"/addStaff"})
-    public String newStaffPForm(ModelMap model)
-    {
-        return "";
-    }
     @RequestMapping(value = {"/editStaff"})
     public String editForm(ModelMap model)
     {
-        return "";
+        return "admin/staffDetail";
     }
 
     @RequestMapping(value = {"/allStaff"})
@@ -62,10 +57,11 @@ public class StaffController
         model.addAttribute("listDepts", listDepts);
         return "admin/staffs";
     }
-    @RequestMapping(value = {"/staff"})
-    public String staffsPage(ModelMap model
-    , @RequestParam("txtEmpName") String empName
-    , @RequestParam("department") int deptId  )
+
+    @RequestMapping(value = {"/staff"} )
+    public String staffSearch(ModelMap model
+    , @RequestParam("empName") String empName
+    , @RequestParam("deptNo") int deptId  )
     {
         List<Employee> listStaffs;
         if (deptId>=0)
@@ -83,4 +79,27 @@ public class StaffController
         return "admin/staffs";
     }
 
+    @RequestMapping(value = {"/addStaff"} /*, method = RequestMethod.POST*/)
+    public String newStaffForm(ModelMap model) // đi tới form tạo mới
+    {
+        List<Department> departments = deptMapper.getAllDept();
+        model.addAttribute("deptList", departments);
+        return "admin/staffDetail";
+    }
+    @RequestMapping(value = {"/staffDetail"} , method = RequestMethod.GET)
+    public String editStaffForm(ModelMap model , @RequestParam("edit") boolean mode , @RequestParam("staffNo") int staffNo
+        ) // đi tới form sửa
+    {
+        newStaffForm(model);
+        model.addAttribute("mode", mode); //mode hiện tại là sừa thông tin
+        model.addAttribute("staffNo", staffNo); //truyền mã nhân viên vào map
+        return "admin/staffDetail";
+    }
+    @RequestMapping(value = {"/staffSuccess"} , method = RequestMethod.POST)
+    public String success(ModelMap model
+         , RedirectAttributes redirect)
+    {
+        redirect.addFlashAttribute("successMessage", "Success !");
+        return "redirect:/admincp/staff";
+    }
 }

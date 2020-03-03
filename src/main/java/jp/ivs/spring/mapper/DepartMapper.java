@@ -10,10 +10,13 @@ import org.apache.ibatis.annotations.Update;
 
 public interface DepartMapper
 {
-    @Select(" SELECT * FROM Departs ")
+    final String GET_ALL_DEPT_CLAUSE = " SELECT * FROM Departs ";
+    @Select(GET_ALL_DEPT_CLAUSE)
     List<Department> getAllDept();
+    @Select(GET_ALL_DEPT_CLAUSE + " WHERE Departs.id = #{deptNo} ")
+    Department getDeptByNo();
     @Update(" UPDATE Depart SET Name=#{name} WHERE Id=#{id}; ")
     boolean editDeptName(Department department);
     @Insert(" INSERT INTO Depart(Id, Name) VALUES(#{id} , #{name}); ")
-    boolean addDeptName(Department department);
+    boolean addNewDept(Department department);
 }

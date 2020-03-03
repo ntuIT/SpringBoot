@@ -33,11 +33,11 @@
         <div class="col-lg-12">
             <h1 class="page-header"><th:block th:text="#{caption.Staff}" /> </h1>
         </div>
-        <form action="#" th:action="@{/adminp/staff}">
-        <input type="text" placeholder="Tên nhân viên" th:name="txtEmpName"/>
+        <form action="/admincp/staff" >
+        <input type="text" th:placeholder="#{lb.empName}" name="empName" />
         <button>Tìm kiếm</button>
         <label> Phòng ban
-            <select th:name="department">
+            <select  name="deptNo">
                 <option th:value="-1" th:text="--"/>
                 <th:block th:each="dept, state : ${listDepts}">
                     <option th:value="${dept.getId()}" th:text="${dept.getName()}"/>
@@ -45,6 +45,7 @@
             </select>
         </label>
         </form>
+
     </div>
 
     <div class="row"><div class="col-lg-12">

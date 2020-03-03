@@ -7,22 +7,28 @@ import java.util.List;
 
 public interface EmployeeMapper
 {
-    @Select(" SELECT s.Id , s.Name , s.Gender , s.Birthday , s.Photo , s.DepartId , s.Email , s.Level , s.Phone , s.Salary, s.Level , s.Notes , s.DepartId , d.Name as 'DepartName' " +
-        " FROM staffs s  join departs d on s.DepartId = d.Id ORDER BY s.DepartId;  ")
+    final String QUERY_ALL_STAFF = " SELECT s.Id , s.Name , s.Gender , s.Birthday , s.Photo , s.DepartId , s.Email , s.Level , s.Phone , s.Salary, s.Level , s.Notes , s.DepartId , d.Name as 'DepartName' "
+            + " FROM staffs s  join departs d on s.DepartId = d.Id ";
+    @Select(QUERY_ALL_STAFF + " ORDER BY s.DepartId;  ")
     List<Employee> getAllStaffs();
-    @Select(" SELECT s.Id , s.Name , s.Gender , s.Birthday , s.Photo , s.DepartId , s.Email , s.Level , s.Phone , s.Salary, s.Level , s.Notes , s.DepartId , d.Name as 'DepartName' " +
-        " FROM staffs s  join departs d on s.DepartId = d.Id WHERE s.DepartId = #{deptId}; ")
-    List<Employee> getStaffsListForDept(int deptId);
-    @Select(" SELECT s.Id , s.Name , s.Gender , s.Birthday , s.Photo , s.DepartId , s.Email , s.Level , s.Phone , s.Salary, s.Level , s.Notes , s.DepartId , d.Name as 'DepartName' FROM staffs s  join departs d on s.DepartId = d.Id" +
-            " WHERE s.DepartId = #{deptId} AND s.Name LIKE '%#{staffName}%' ; ")
-    List<Employee> searchStaffsList(int deptId, String staffName);
 
-    @Select(" SELECT * FROM Staffs s WHERE s.Id = #{staffNo} ")
+    @Select(QUERY_ALL_STAFF + " WHERE s.DepartId = #{deptId}; ")
+    List<Employee> getStaffsListForDept(int deptId);
+
+    final String GET_STAFF_BY_SEARCH2 = QUERY_ALL_STAFF
+        + " WHERE s.DepartId = '#{deptId}' AND s.Name LIKE '%#{staffName}%' ;";
+    @Select(GET_STAFF_BY_SEARCH2)
+    List<Employee> searchStaffsList(@Param("deptId") int deptId, @Param("staffName") String staffName);
+
+    @Select(" SELECT * FROM Staffs s WHERE s.Id = #{staffNo} ;")
     Employee get1StaffByNo(int staffNo);
-    @Delete(" DELETE FROM Staffs WHERE Id = #{staffNo} ")
+    @Delete(" DELETE FROM Staffs WHERE Id = #{staffNo} ;")
     boolean drop1StaffByNo(int staffNo);
 //    @Update(" UPDATE Staffs() WHERE Id = #{staffNo} ")
 //    boolean editStaffsByNo(Employee staff);
-//    @Insert(" INSERT INTO Staffs() VALUES (); ")
-//    boolean addNewStaff(Employee staff);
+    final String INSERT_STAFF_COMMON = " INSERT INTO staffs (Id, Name, Gender, Birthday, Photo, Email, Phone, Salary, Level, Notes, DepartId) VALUES ";
+    final String ADD_STAFF = INSERT_STAFF_COMMON
+            + "( #{id} , #{name} , #{gender} , #{birthday} , #{photo} , #{email} , #{phone} , #{salary} , #{level} , #{notes} , #{departI} ); ";
+    @Update(ADD_STAFF)
+    void addNewStaff(Employee staff);
 }
