@@ -1,16 +1,17 @@
 package jp.ivs.spring.model.admin;
+import java.sql.Date;
 
 public class Employee
 {
     int id, departId, level;
     String name;
-    String birthday;
+    Date birthday;
     String photo;
     String email;
     String phone;
     String notes;
     String departName;
-    boolean gender;
+    int gender;
     double salary;
 
     //region Hàm Tạo()
@@ -23,12 +24,12 @@ public class Employee
     public Employee( int departId
             , String departName
             , String name
-            , String birthday
+            , Date birthday
             , String photo
             , String email
             , String phone
             , String notes
-            , boolean gender
+            , int gender
             , int level
             , double salary
     )   {
@@ -56,8 +57,8 @@ public class Employee
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getBirthday() { return birthday; }
-    public void setBirthday(String Birthday) { this.birthday = Birthday; }
+    public Date getBirthday() { return birthday; }
+    public void setBirthday(Date Birthday) { this.birthday = Birthday; }
 
     public String getPhoto() { return photo; }
     public void setPhoto(String photo) { this.photo = photo; }
@@ -71,8 +72,8 @@ public class Employee
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
 
-    public boolean getGender() { return gender; }
-    public void setGender(boolean gender) { this.gender = gender; }
+    public int getGender() { return gender; }
+    public void setGender(int gender) { this.gender = gender; }
 
     public int getLevel() { return level; }
     public void setLevel(int level) { this.level = level; }

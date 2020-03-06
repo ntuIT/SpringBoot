@@ -33,11 +33,11 @@
         <div class="col-lg-12">
             <h1 class="page-header"><th:block th:text="#{caption.Staff}" /> </h1>
         </div>
-        <div class="panel panel-default"><form action="/adminp/dropStaff"  th:method="DELETE">
-            StaffNの: <input type="text" readonly="readonly" />
+        <div class="panel panel-default"><form action="/admincp/dropStaff"  method="POST">
+            <div class="btn btn-outline btn-default">StaffNの: </div>
             <input type="hidden" th:value="${staffNo}" th:name="staffNo" />
             <br><input type="password" th:name="userPass" placeholder="Nhập lại password" />
-            <button>Submit</button>
+            <button type="submit" class="btn btn-outline btn-success">Submit</button>
         </form></div>
     </div>
     <!--

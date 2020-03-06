@@ -25,13 +25,14 @@ public class StaffController
     @Autowired
     DepartMapper deptMapper;
 
+    //region chức năng xóa staff
     @RequestMapping(value = {"/dropStaff"} , method = RequestMethod.GET)
     public String dropForm(ModelMap model, @RequestParam("staffNo") int staffNo)
     {
         model.addAttribute("staffNo", staffNo);
         return "admin/dropStaff";
     }
-    @RequestMapping(value = {"/dropStaff"} , method = RequestMethod.DELETE)
+    @RequestMapping(value = {"/dropStaff"} , method = RequestMethod.POST)
     public String dropStaff(ModelMap model
     , @RequestParam("staffNo") int staffNo
     , @RequestParam("userPass") String adminPass
@@ -42,9 +43,11 @@ public class StaffController
         } catch (Exception ex) {}
 
         redirect.addFlashAttribute("successMessage", "Success !");
-        return "redirect:/admincp/staff";
+        return "redirect:/admincp/allStaff";
     }
+    //endregion chức năng xóa staff
 
+    //region view lưới staff
     @RequestMapping(value = {"/allStaff"})
     public String allStaffsPage(ModelMap model)
     {
@@ -75,37 +78,40 @@ public class StaffController
         model.addAttribute("listDepts", listDepts);
         return "admin/staffs";
     }
+    //endregion view lưới staff
 
-    @RequestMapping(value = {"/addStaff"} /*, method = RequestMethod.POST*/)
+    //region chức năng thêm/sửa
+    @RequestMapping(value = {"/addStaff"} )
     public String newStaffForm(ModelMap model) // đi tới form tạo mới
     {
         List<Department> departments = deptMapper.getAllDept();
         model.addAttribute("deptList", departments);
         model.addAttribute("employee", new Employee());
+        model.addAttribute("mode", 1); //mode hiện tại là thêm mới
         return "admin/staffDetail";
     }
-    @RequestMapping(value = {"/staffDetail"} , method = RequestMethod.GET)
-    public String editStaffForm(ModelMap model , @RequestParam("edit") boolean mode , @RequestParam("staffNo") int staffNo
-        ) // đi tới form sửa
+    @RequestMapping(value = {"/staffDetail"} , method = RequestMethod.POST)  // đi tới form sửa
+    public String editStaffForm(ModelMap model
+         , @RequestParam("mode") int mode
+         , @RequestParam("staffNo") int staffNo )
     {
-        newStaffForm(model);
-        model.addAttribute("mode", mode); //mode hiện tại là sừa thông tin
-        model.addAttribute("staffNo", staffNo); //truyền mã nhân viên vào map
-        return "admin/staffDetail";
-    }
-        @RequestMapping(value = {"/editStaff"})
-    public String editForm(ModelMap model)
-    {
+        model.addAttribute("mode", mode);
+        model.addAttribute("staffNo", staffNo);
+        model.addAttribute("staffInfor", empMapper.get1StaffByNo(staffNo));
         return "admin/staffDetail";
     }
 
     @RequestMapping(value = {"/staffSuccess"} , method = RequestMethod.POST)
     public String success(ModelMap model
          , @ModelAttribute Employee staff
+         , @RequestParam("mode") int mode
          , RedirectAttributes redirect)
     {
-        Employee target = staff;
+        if(mode == 1)   empMapper.addNewStaff(staff);
+        else if (mode == -1) empMapper.updateStaff(staff);
+            else empMapper.get1StaffByNo(staff.getId());
         redirect.addFlashAttribute("successMessage", "Success !");
-        return "redirect:/admincp/staff";
+        return "redirect:/admincp/allStaff";
     }
+    //endregion chức năng thêm/sửa
 }
