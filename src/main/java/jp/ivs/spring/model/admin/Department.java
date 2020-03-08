@@ -1,5 +1,7 @@
 package jp.ivs.spring.model.admin;
 
+import java.util.*;
+
 public class Department
 {
     int id; String name;
@@ -15,4 +17,15 @@ public class Department
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     //endregion
+
+    public static Map<Integer , String> parseListDept(List<Department> deptList) //ép List dept thành Map dept
+    {
+        Map<Integer , String> map = new HashMap<>();
+        int n = deptList.size();
+        for (Department i : deptList)
+        {
+            map.put(i.getId(), i.getName());
+        }
+        return map;
+    }
 }

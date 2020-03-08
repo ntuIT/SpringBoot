@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Provider;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admincp")
@@ -55,6 +56,7 @@ public class StaffController
         List<Department> listDepts = deptMapper.getAllDept();
         model.addAttribute("listStaffs", listStaffs);
         model.addAttribute("listDepts", listDepts);
+        model.addAttribute("departments", Department.parseListDept(listDepts));
         return "admin/staffs";
     }
 
@@ -76,6 +78,7 @@ public class StaffController
         List<Department> listDepts = deptMapper.getAllDept();
         model.addAttribute("listStaffs", listStaffs);
         model.addAttribute("listDepts", listDepts);
+        model.addAttribute("departments", Department.parseListDept(listDepts));
         return "admin/staffs";
     }
     //endregion view lưới staff
@@ -90,14 +93,26 @@ public class StaffController
         model.addAttribute("mode", 1); //mode hiện tại là thêm mới
         return "admin/staffDetail";
     }
-    @RequestMapping(value = {"/staffDetail"} , method = RequestMethod.POST)  // đi tới form sửa
-    public String editStaffForm(ModelMap model
+
+    @RequestMapping(value = {"/staffDetail"} )
+    public String detailStaffForm(ModelMap model
          , @RequestParam("mode") int mode
-         , @RequestParam("staffNo") int staffNo )
+         , @RequestParam("staffNo") int staffNo)
     {
+        List<Department> deptList = deptMapper.getAllDept();
+        model.addAttribute("deptList", deptList);
         model.addAttribute("mode", mode);
         model.addAttribute("staffNo", staffNo);
         model.addAttribute("staffInfor", empMapper.get1StaffByNo(staffNo));
+        model.addAttribute("departments", Department.parseListDept(deptList));
+        return "admin/StaffDetail";
+    }
+    @RequestMapping(value = {"/staffDetail"} , method = RequestMethod.POST)  // đi tới form sửa
+    public String editStaffForm(ModelMap model
+            , @RequestParam("mode") int mode
+            , @RequestParam("staffNo") int staffNo )
+    {
+        String prepareMap = detailStaffForm(model,mode,staffNo);
         return "admin/staffDetail";
     }
 

@@ -47,11 +47,13 @@
                 <table  class="table table-striped table-bordered table-hover"><tbody>
                     <tr>
                         <th>Tên</th>
-                        <td><input type="text" th:name="name" /></td>
-                        <td><label>Giới tính
-
-                        </label></td>
+                        <td>
+                            <th:block th:if="${mode==1}"><input type="text" th:name="name" /></th:block>
+                            <th:block th:if="${mode<1}"><input type="text" th:name="name" th:value="${staffInfor.getName()}" /></th:block>
+                        </td>
+                        <td><label>Giới tính</label></td>
                         <td><select  th:name="gender" >
+                            <th:block th:if="${mode<1}"><option selected = "selected" th:value="${staffInfor.getGender()}" /> </th:block>
                             <option th:value="1" th:text="Nam"></option>
                             <option th:value="0" th:text="Nữ"></option>
                             <option th:value="-1" th:text="_"></option>
@@ -62,30 +64,49 @@
                         <th>Ảnh</th>
                         <td><input type="text" th:name="photo" /></td>
                         <td>Sinh nhật</td>
-                        <td><input type="date" th:name="birthday" ></td>
+                        <td>
+                            <th:block th:if="${mode==1}"><input type="date" th:name="birthday" /></th:block>
+                            <th:block th:if="${mode<1}"><input type="date" th:name="birthday" th:value="${staffInfor.getBirthday()}"/></th:block>
+                        </td>
                     </tr>
                     <tr>
                         <th>Email</th>
-                        <td><input type="email" th:name="email" /></td>
+                        <td>
+                            <th:block th:if="${mode==1}"><input type="email" th:name="email" /></th:block>
+                            <th:block th:if="${mode<1}"><input type="email" th:name="email" th:value="${staffInfor.getEmail()}" /></th:block>
+                        </td>
                         <td>Điện thoại</td>
-                        <td><input type="tel" th:name="phone" /></td>
+                        <td>
+                            <th:block th:if="${mode==1}"><input type="tel" th:name="phone" /></th:block>
+                            <th:block th:if="${mode<1}"><input type="tel" th:name="phone" th:value="${staffInfor.getPhone()}" /></th:block>
+                        </td>
                     </tr>
                     <tr>
                         <th>Phòng ban</th>
                         <td><select th:name="departId">
+                            <th:block th:if="${mode<1}"> <option selected="selected" th:value="${staffInfor.getDepartId()}"><th:block th:text="${departments.get(staffInfor.getDepartId())}" /></option> </th:block>
                             <th:block th:each="dept, state : ${deptList}">
                                 <option th:value="${dept.getId()}" th:text="${dept.getName()}"/>
                             </th:block>
                         </select></td>
 
                         <td>Bậc</td>
-                        <td><input type="number" th:name="level" /></td>
+                        <td>
+                            <th:block th:if="${mode==1}"><input type="number" th:name="level" /></th:block>
+                            <th:block th:if="${mode<1}"><input type="number" th:name="level"  th:value="${staffInfor.getLevel()}"/></th:block>
+                        </td>
                     </tr>
                     <tr>
                         <th>Lương</th>
-                        <td><input type="number" th:name="salary"></td>
+                        <td>
+                            <th:block th:if="${mode==1}"><input type="number" th:name="salary"></th:block>
+                            <th:block th:if="${mode<1}"><input type="number" th:name="salary" th:value="${staffInfor.getSalary()}"></th:block>
+                        </td>
+
                         <td>Ghi chú</td>
-                        <td><textarea  th:name="notes" > </textarea></td>
+                        <td>
+                            <textarea th:name="notes" ><th:block th:if="${mode<1}" th:text="${staffInfor.getNotes()}"></th:block></textarea>
+                        </td>
                     </tr>
                 </tbody></table>
             </div>
