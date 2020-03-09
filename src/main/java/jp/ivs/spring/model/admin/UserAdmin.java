@@ -27,5 +27,5 @@ public class UserAdmin
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
     //endregion
-
+	public static String uploadImages = System.getProperty("upload.Directory") + "/img";
 }
