@@ -18,7 +18,7 @@ public class Department
     public void setName(String name) { this.name = name; }
     //endregion
 
-    public static Map<Integer , String> parseListDept(List<Department> deptList) //ép List dept thành Map dept
+    public static Map<Integer , String> castList2Map(List<Department> deptList) //ép List dept thành Map dept
     {
         Map<Integer , String> map = new HashMap<>();
         int n = deptList.size();

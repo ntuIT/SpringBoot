@@ -85,6 +85,9 @@
                         <th>Phòng ban</th>
                         <td><select th:name="departId">
                             <th:block th:if="${mode<1}"> <option selected="selected" th:value="${staffInfor.getDepartId()}"><th:block th:text="${departments.get(staffInfor.getDepartId())}" /></option> </th:block>
+                            <th:block th:each="dept: ${departments}">
+                                <option th:value="${dept.key}" th:text="${dept.value}" />
+                            </th:block>
                             <th:block th:each="dept, state : ${deptList}">
                                 <option th:value="${dept.getId()}" th:text="${dept.getName()}"/>
                             </th:block>

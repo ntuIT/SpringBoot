@@ -56,7 +56,7 @@ public class StaffController
         List<Department> listDepts = deptMapper.getAllDept();
         model.addAttribute("listStaffs", listStaffs);
         model.addAttribute("listDepts", listDepts);
-        model.addAttribute("departments", Department.parseListDept(listDepts));
+        model.addAttribute("departments", Department.castList2Map(listDepts));
         return "admin/staffs";
     }
 
@@ -66,19 +66,30 @@ public class StaffController
     , @RequestParam("deptNo") int deptId  )
     {
         List<Employee> listStaffs;
-        if (deptId>=0)
-        {
-            if (!empName.equals(""))
-                listStaffs = empMapper.searchStaffsList(deptId, empName);
-            else listStaffs = empMapper.getStaffsListForDept(deptId);
-        }
-        else {
-            listStaffs = empMapper.getAllStaffs();
-        }
         List<Department> listDepts = deptMapper.getAllDept();
-        model.addAttribute("listStaffs", listStaffs);
         model.addAttribute("listDepts", listDepts);
-        model.addAttribute("departments", Department.parseListDept(listDepts));
+        if (empName.equals("") && deptId<0)
+        {
+            listStaffs = empMapper.getAllStaffs();
+            model.addAttribute("listStaffs", listStaffs);
+            return "admin/staffs";
+        }
+        if (empName.equals("") || deptId<0)
+        {
+            if (empName.equals(""))
+            {
+                listStaffs = empMapper.getStaffsListForDept(deptId);
+                model.addAttribute("listStaffs", listStaffs);
+            }
+            if (deptId<0)
+            {
+                listStaffs = empMapper.getStaffsListForName(empName);
+                model.addAttribute("listStaffs", listStaffs);
+            }
+        }   else {
+            listStaffs = empMapper.searchStaffsList(empName, deptId);
+            model.addAttribute("listStaffs", listStaffs);
+        }
         return "admin/staffs";
     }
     //endregion view lưới staff
@@ -104,7 +115,7 @@ public class StaffController
         model.addAttribute("mode", mode);
         model.addAttribute("staffNo", staffNo);
         model.addAttribute("staffInfor", empMapper.get1StaffByNo(staffNo));
-        model.addAttribute("departments", Department.parseListDept(deptList));
+        model.addAttribute("departments", Department.castList2Map(deptList));
         return "admin/StaffDetail";
     }
     @RequestMapping(value = {"/staffDetail"} , method = RequestMethod.POST)  // đi tới form sửa
