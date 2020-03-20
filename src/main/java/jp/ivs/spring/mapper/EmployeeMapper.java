@@ -14,7 +14,7 @@ public interface EmployeeMapper
 
     @Select(QUERY_ALL_STAFF + " WHERE s.DepartId = #{deptId}; ")
     List<Employee> getStaffsListForDept(int deptId);
-    @Select(QUERY_ALL_STAFF + " WHERE s.Name LIKE '%#{staffName}%' ;")
+    @Select(QUERY_ALL_STAFF + " WHERE s.Name LIKE '%' + #{staffName}+ '%' ;")
     List<Employee> getStaffsListForName(String staffName);
 
     final String GET_STAFF_BY_SEARCH2 = QUERY_ALL_STAFF
