@@ -56,5 +56,9 @@ public class AdminController
         return goToLogin(model);
     }
 
-
+    @RequestMapping(value = {"/frag"})
+    public String frag(ModelMap modelMap)
+    {
+        return "admin/adminLayout";
+    }
 }
