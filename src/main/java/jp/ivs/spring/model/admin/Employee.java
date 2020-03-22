@@ -1,5 +1,7 @@
 package jp.ivs.spring.model.admin;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Employee
@@ -85,4 +87,15 @@ public class Employee
     public String getDepartName() { return departName; }
     public void setDepartName(String departName) { this.departName = departName; }
     //endregion>
+
+    public static Map castList2Map(List<Employee> list)
+    {
+        Map<Integer, Employee> map = new HashMap<>();
+        int n = list.size();
+        for (Employee i : list)
+        {
+            map.put(i.getId(), i);
+        }
+        return map;
+    }
 }

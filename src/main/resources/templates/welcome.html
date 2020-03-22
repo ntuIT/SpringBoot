@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: head"></head>
+<head th:replace="mainLayout :: header"></head>
 
 <body>
-<nav th:replace="layout :: header"></nav>
+<nav th:replace="mainLayout :: headBar"></nav>
 
 <div class="container" id="main-content">
     <div class="row">
@@ -59,7 +59,7 @@
     </div>
 </div><!-- /.container -->
 
-<footer th:replace="layout :: footer"></footer>
+<footer th:replace="mainLayout :: footer"></footer>
 
 </body>
 </html>

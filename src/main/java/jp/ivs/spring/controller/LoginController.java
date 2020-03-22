@@ -20,8 +20,8 @@ public class LoginController
     @RequestMapping({"/login"})
     public String login( @RequestParam("email") String email
          , @RequestParam("password") String pass
-         ,ModelMap model)
+         , ModelMap model)
     {
-        return "layout";
+        return "mainLayout";
     }
 }

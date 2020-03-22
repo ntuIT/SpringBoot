@@ -14,12 +14,12 @@ public interface EmployeeMapper
 
     @Select(QUERY_ALL_STAFF + " WHERE s.DepartId = #{deptId}; ")
     List<Employee> getStaffsListForDept(int deptId);
-    @Select(QUERY_ALL_STAFF + " WHERE s.Name LIKE '%'||#{staffName}||'%' ;")
+    @Select(QUERY_ALL_STAFF + " WHERE s.Name LIKE CONCAT('%',#{staffName},'% ');")
     List<Employee> getStaffsListForName(String staffName);
 
-    final String GET_STAFF_BY_SEARCH2 = QUERY_ALL_STAFF
-        + " WHERE s.DepartId = '#{deptId}' AND s.Name LIKE '%#{staffName}%' ;";
-    @Select(GET_STAFF_BY_SEARCH2)
+    final String GET_SEARCH_STAFF = QUERY_ALL_STAFF
+        + " WHERE s.DepartId = #{deptId} AND s.Name LIKE CONCAT('%',#{staffName},'%');";
+    @Select(GET_SEARCH_STAFF)
     List<Employee> searchStaffsList(@Param("staffName") String staffName, @Param("deptId") int deptId);
 
     @Select(" SELECT * FROM Staffs s WHERE s.Id = #{staffNo} ;")
