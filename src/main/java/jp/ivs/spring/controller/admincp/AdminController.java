@@ -33,13 +33,13 @@ public class AdminController
         return "admin/welcome";
     }
 
-    @RequestMapping(value = {"/loginPage"})
+    @RequestMapping(value = {"/login"})
     public String goToLogin(ModelMap model)
     {
         return "admin/login";
     }
 
-    @RequestMapping(value = {"/login"}, method=RequestMethod.POST)
+    @RequestMapping(value = {"/"}, method=RequestMethod.POST)
     public String login(ModelMap model
     , @RequestParam("email") String user
     , @RequestParam("password") String pass)
@@ -56,9 +56,4 @@ public class AdminController
         return goToLogin(model);
     }
 
-    @RequestMapping(value = {"/frag"})
-    public String frag(ModelMap modelMap)
-    {
-        return "admin/adminLayout";
-    }
 }
