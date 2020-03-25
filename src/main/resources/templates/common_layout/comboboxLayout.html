@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <th:block th:fragment="cbbDeptFrag">
+        <th:block th:each="dept : ${departments}">
+            <option value="${dept.getKey()}" ><th:block th:text="${dept.getValue()}" /></option>
+        </th:block>
+    </th:block>
+
+</body>
+</html>

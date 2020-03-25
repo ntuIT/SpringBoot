@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RecordDetail
 {
@@ -76,5 +79,15 @@ public class RecordDetail
             list.add(record);
         } //dataLine.close();
         return list;
+    }
+
+    public static Map castList2Map(List<RecordDetail> list)
+    {
+        Map<Integer, RecordDetail> map = new HashMap<>();
+        for (RecordDetail record : list)
+        {
+            map.put(record.getRecordNo(), record);
+        }
+        return map;
     }
 }

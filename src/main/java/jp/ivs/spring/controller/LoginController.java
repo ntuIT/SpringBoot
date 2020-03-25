@@ -1,15 +1,25 @@
 package jp.ivs.spring.controller;
 
+import jp.ivs.spring.mapper.DepartMapper;
+import jp.ivs.spring.model.admin.Department;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @Controller
 public class LoginController
 {
+    @Autowired
+    DepartMapper departMapper;
     @RequestMapping(value = {"/index","/"})
-    public String index()
+    public String index(ModelMap modelMap)
     {
+        List<Department> list = departMapper.getAllDept();
+        modelMap.addAttribute("departments", Department.castList2Map(list));
         return "welcome";
     }
     @RequestMapping("/loginPage")

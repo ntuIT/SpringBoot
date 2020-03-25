@@ -24,6 +24,9 @@
     </div>
 
     <div class="row mt-4">
+        <select><th:block th:each="dept : ${departments}">
+            <option th:value="${dept.getKey()}"><th:block th:text="${dept.getValue()}"></th:block></option>
+        </th:block></select>
         <th:block th:if="${#lists.isEmpty(contacts)}">
             <h5>No contacts</h5>
         </th:block>

@@ -12,7 +12,7 @@ import jp.ivs.spring.model.RecordDetail;
 @Controller
 public class RecordsController
 {
-    @RequestMapping(value = "/admincp/allrecords")
+    @RequestMapping(value = "/admincp/allRecords")
     public String recordsForm(ModelMap model)
     {
         List<RecordDetail> list = new ArrayList<>();

@@ -34,11 +34,10 @@
                 <h1 class="page-header"><th:block th:text="#{index.Welcome}" /> &nbsp; <th:block th:text="${adminName}"/> </h1>
             </div>
             <label><th:block th:text="#{caption.Department}" /> :
-                    <select > <th:block th:each="depart, state : ${listDeparts}">
-                        <option th:value="${depart.getId()}"><th:block th:text="${depart.getName()}"/> </option>
-                    </th:block> </select>
+                <select name="cbbDepts">
+                    <th:block th:replace="common_layout/comboboxLayout.html :: cbbDeptFrag"></th:block>
+                </select>
             </label>
-            <form action="/admincp/addStaff" ><input type="submit" text="default" /></form>
 
         </div>
     </div>

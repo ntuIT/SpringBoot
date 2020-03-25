@@ -1,5 +1,9 @@
 package jp.ivs.spring.model.admin;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class UserAdmin
 {
     String username, password, fullName;
@@ -28,4 +32,14 @@ public class UserAdmin
     public void setFullName(String fullName) { this.fullName = fullName; }
     //endregion
 	public static String uploadImages = System.getProperty("upload.Directory") + "/img";
+
+    public static Map castList2Map(List<UserAdmin> list)
+    {
+        HashMap<String, UserAdmin> map = new HashMap<>();
+        for (UserAdmin userAdmin : list)
+        {
+            map.put(userAdmin.getUsername(), userAdmin);
+        }
+        return map;
+    }
 }

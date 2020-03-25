@@ -10,6 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import jp.ivs.spring.mapper.UserMapper;
 import jp.ivs.spring.model.admin.UserAdmin;
@@ -25,11 +27,13 @@ public class AdminController
     @Autowired
     EmployeeMapper empMapper;
 
-    @RequestMapping(value = "/")
+//    @RequestMapping(value = "/")
     public String goToAdmin(ModelMap model)
     {
         List<Department> list = departMapper.getAllDept();
+        Map map = Department.castList2Map(list);
         model.addAttribute("listDeparts", list);
+        model.addAttribute("departments", map);
         return "admin/welcome";
     }
 
