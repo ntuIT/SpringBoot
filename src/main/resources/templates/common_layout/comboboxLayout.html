@@ -12,5 +12,11 @@
         </th:block>
     </th:block>
 
+    <th:block th:fragment="cbbGender">
+        <option value="1"><th:block th:text="#{gender.Male}" /></option>
+        <option value="0"><th:block th:text="#{gender.Female}" /></option>
+        <option value="-1"><th:block th:text="#{gender.null}" /></option>
+    </th:block>
+
 </body>
 </html>
