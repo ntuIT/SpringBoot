@@ -8,6 +8,7 @@
     <title>Layout</title>
 
     <!-- region Bootstrap Core -->
+    <th:block th:fragment="bootstrapCore">
     <link href="../../static/bootstrap/sb-admin/vendor/bootstrap/css/bootstrap.min.css"
           th:href="@{/bootstrap/sb-admin/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
@@ -25,10 +26,10 @@
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <!endregion-->
+    </th:block>
 
 </head>
 <body>
@@ -284,10 +285,10 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="/admincp/allStaff"><i class="fa fa-table fa-fw"></i><th:block th:text="#{caption.List} #{caption.employee}" /></a>
+                        <a href="/admincp/allStaff"><i class="fa fa-table fa-fw"></i><th:block th:text="#{caption.List}" /><th:block th:text="#{caption.employee}" /></a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                        <a href="allRecords"><i class="fa fa-edit fa-fw"></i> Forms</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>

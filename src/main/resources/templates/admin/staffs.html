@@ -27,7 +27,7 @@
     <!endregion-->
 </head>
 <body>
-<!--    <nav th:replace="adminLayout :: header"></nav>-->
+    <nav th:replace="admin/adminLayout :: amNav"></nav>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -43,7 +43,7 @@
             <div class="panel-heading">
                 <form action="/admincp/staff" >
                     <button type="submit"><th:block th:text="#{btn.Search}" /></button>
-                    <input name="empName" type="text" th:placeholder="#{lb.empName}"  />
+                    <input name="empName" type="text" class="form-control" th:placeholder="#{lb.empName}"  />
 
                     <div class = "navbar-right"> <th:block th:text="#{caption.Department}" />
                         <select  name="deptNo">
@@ -88,8 +88,8 @@
                         <tr th:each="staff, state : ${listStaffs}">
                             <th scope="row" >
                                 <form action="/admincp/staffDetail" >
-                                    <input type="hidden" th:name="mode" th:value="0">
-                                    <input type="hidden" th:name="staffNo" th:value="${staff.getId()}" />
+                                    <input type="hidden" hidden="hidden" th:name="mode" th:value="0">
+                                    <input type="hidden" hidden="hidden" th:name="staffNo" th:value="${staff.getId()}" />
                                 <button type="submit" class="btn btn-outline btn-info"><th:block th:text="${state.count}" /></button>
                                 </form>
                             </th>

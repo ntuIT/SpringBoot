@@ -21,9 +21,8 @@ public class RecordsController
     @RequestMapping(value = "/admincp/allRecords")
     public String recordsForm(ModelMap model)
     {
-        List<RecordDetail> list = new ArrayList<>();
-        Map map = recordMapper.getAllRecords();
-        model.addAttribute("listRecords", list);
+        Map listRecords = RecordDetail.castList2Map(recordMapper.getAllRecords());
+        model.addAttribute("listRecords", listRecords);
         return "admin/recordsForm";
     }
     @RequestMapping(value = "/admincp/records_bystaff"
