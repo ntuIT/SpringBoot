@@ -8,7 +8,7 @@
 <body>
 
 <!--region include here-->
-
+<nav th:replace="admin/adminLayout :: amNav"></nav>
 <!--endregion-->
 
 <div id="page-wrapper">
@@ -26,6 +26,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <th:block th:utext="#{caption.recordManag}" />
+                    <form>
+                        <div class="navbar-right">
+                            <th:block th:replace="common_layout/comboboxLayout :: cbbDeptFrag"></th:block>
+                        </div>
+                    </form>
                 </div>
                 <div class="panel-body"><div class="table-responsive">
                 <table class="table" >
