@@ -11,12 +11,10 @@ import java.util.Map;
 
 public interface RecordMapper
 {
-    @Select("select * from recorddetails ORDER BY Date")
+    @Select("select * from recorddetails ORDER BY Date DESC")
     List<RecordDetail> getAllRecords();
-    @Select("SELECT * FROM recorddetails ORDER BY departNo, Date")
+    @Select("SELECT * FROM recorddetails ORDER BY departNo ASC, Date DESC")
     List<RecordDetail> getAllSortByDept();
-    @Select("SELECT * FROM recorddetails ORDER BY staffNo, Date")
-    List<RecordDetail> getAllSortByStaff();
 
     @Select("select * from recorddetails where RecordNo = #{recordNo} ")
     RecordDetail get1Record(int recordNo);
