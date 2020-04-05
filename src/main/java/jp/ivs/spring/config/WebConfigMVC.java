@@ -1,22 +1,26 @@
 package jp.ivs.spring.config;
 
+import ch.qos.logback.core.pattern.Converter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import java.util.Date;
 import java.util.Locale;
 
 @Configuration
-public class WebConfigMVC implements WebMvcConfigurer
+public class WebConfigMVC extends WebMvcConfigurerAdapter
+implements WebMvcConfigurer
 {
-
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
@@ -29,6 +33,7 @@ public class WebConfigMVC implements WebMvcConfigurer
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
+
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {

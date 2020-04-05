@@ -23,5 +23,11 @@
         <option th:value="false"><th:block th:text="#{lb.dislaw}" /></option>
     </th:block>
 
+    <th:block th:fragment="cbbYears">
+        <th:block th:each="year : ${years}">
+            <option th:value="${year}"> <th:block th:utext="${year}"/> </option>
+        </th:block>
+    </th:block>
+
 </body>
 </html>

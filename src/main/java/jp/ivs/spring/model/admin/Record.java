@@ -1,5 +1,7 @@
 package jp.ivs.spring.model.admin;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +12,7 @@ public class Record
     int id, staffId;
     boolean type;
     String reason;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date date;
 
     //region hàm tạo()

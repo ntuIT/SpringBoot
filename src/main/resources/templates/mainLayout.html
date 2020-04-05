@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="header">
+    <title>ABC Staff Group</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>IVS App</title>
     <link href="../static/images/logo.png" th:href="@{/static/images/logo.png}" rel="shortcut icon" />
-
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <!-- Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -22,14 +19,16 @@
 </head>
 
 <body>
-<nav th:fragment="headBar" class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">IVS MyContact App</a>
+<nav th:fragment="headBar" class="navbar navbar-dark bg-dark" style=" margin-bottom: 1px; ">
+    <a class="navbar-brand" href="/index">Index</a>
 </nav>
 
 <h1>Main content</h1>
+<th:block th:fragment="frgRecordView">
+
+</th:block>
 
 <footer th:fragment="footer" class="container">
-    <strong>&copy; 2019 Centras.edu.vn</strong>
 </footer>
 
 </body>

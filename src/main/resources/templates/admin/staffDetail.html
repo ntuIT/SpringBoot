@@ -27,10 +27,12 @@
     <!endregion-->
 </head>
 <body>
-<div id="page-wrapper">
+<div id="page-wrapper" style="margin-left: 50px; margin-right: 50px">
 
     <div class="row">
-        <div class="col-lg-12"><h1 class="page-header"><th:block th:text="#{caption.Staff}" /> </h1></div>
+        <div class="col-lg-12"><h3 class="page-header"><th:block th:text="#{caption.Staff}" /> </h3></div>
+    </div>
+    <div class="row">
         <!--/*@thymesVar id="employee" type="employee"*/-->
         <form action="#" th:action="@{/admincp/staffSuccess}" method="post" th:object="${employee}">
             <input type="hidden" name="mode" value="1">
@@ -66,7 +68,7 @@
                         <td>Sinh nhật</td>
                         <td>
                             <th:block th:if="${mode==1}"><input type="date" th:name="birthday" /></th:block>
-                            <th:block th:if="${mode<1}"><input type="date" th:name="birthday" th:value="${staffInfor.getBirthday()}"/></th:block>
+<!--                            <th:block th:if="${mode<1}"><input type="date" th:name="birthday" th:value="${staffInfor.getBirthday()}"/></th:block>-->
                         </td>
                     </tr>
                     <tr>

@@ -15,7 +15,7 @@ public interface DepartMapper
     @Select(GET_ALL_DEPT_CLAUSE)
     List<Department> getAllDept();
     @Select(GET_ALL_DEPT_CLAUSE + " WHERE Departs.id = #{deptNo} ")
-    Department getDeptByNo();
+    Department getDeptByNo(int deptNo);
     @Update(" UPDATE Depart SET Name=#{name} WHERE Id=#{id}; ")
     boolean editDeptName(Department department);
     @Insert(" INSERT INTO Depart(Id, Name) VALUES(#{id} , #{name}); ")
