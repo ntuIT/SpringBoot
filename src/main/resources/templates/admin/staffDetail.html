@@ -34,9 +34,18 @@
     </div>
     <div class="row">
         <!--/*@thymesVar id="employee" type="employee"*/-->
-        <form action="#" th:action="@{/admincp/staffSuccess}" method="post" th:object="${employee}">
-            <input type="hidden" name="mode" value="1">
+
         <div class="panel panel-default">
+            <th:block th:if="${mode}==0">
+                <form class="navbar-right" style="margin-inline-end: auto;"
+                      action="#" th:action="@{/admincp/addRecord}" th:object="${staffInfor}" method="post">
+                <input type="hidden" hidden="hidden" th:name="id" th:value="${staffInfor.getId()}" />
+                <input type="hidden" hidden="hidden" th:name="departId" th:value="${staffInfor.getDepartId()}" />
+                <button th:type="submit" class="btn btn-outline btn-default"><th:block th:text="#{btn.createRecord}"/></button>
+                </form>
+            </th:block>
+            <form action="#" th:action="@{/admincp/staffSuccess}" method="post" th:object="${employee}">
+                <input type="hidden" name="mode" value="1">
             <div class="panel-heading">
                 <th:block th:if="${mode}==1">
                 <button type="submit" class="btn btn-success"><th:block th:text="#{btn.add}" /></button>
@@ -48,7 +57,7 @@
             <div class="panel-body">
                 <table  class="table table-striped table-bordered table-hover"><tbody>
                     <tr>
-                        <th>Tên</th>
+                        <th th:text="#{lb.empName}"></th>
                         <td>
                             <th:block th:if="${mode==1}"><input type="text" th:name="name" /></th:block>
                             <th:block th:if="${mode<1}"><input type="text" th:name="name" th:value="${staffInfor.getName()}" /></th:block>
@@ -65,37 +74,36 @@
                     <tr>
                         <th>Ảnh</th>
                         <td><input type="text" th:name="photo" /></td>
-                        <td>Sinh nhật</td>
+                        <th>Sinh nhật</th>
                         <td>
                             <th:block th:if="${mode==1}"><input type="date" th:name="birthday" /></th:block>
-<!--                            <th:block th:if="${mode<1}"><input type="date" th:name="birthday" th:value="${staffInfor.getBirthday()}"/></th:block>-->
+                            <th:block th:if="${mode<1}"><input type="date" th:name="birthday" th:value="${staffInfor.getBirthday()}"/></th:block>
                         </td>
                     </tr>
                     <tr>
-                        <th>Email</th>
+                        <th>Em@il</th>
                         <td>
                             <th:block th:if="${mode==1}"><input type="email" th:name="email" /></th:block>
                             <th:block th:if="${mode<1}"><input type="email" th:name="email" th:value="${staffInfor.getEmail()}" /></th:block>
                         </td>
-                        <td>Điện thoại</td>
+                        <th>Điện thoại</th>
                         <td>
                             <th:block th:if="${mode==1}"><input type="tel" th:name="phone" /></th:block>
                             <th:block th:if="${mode<1}"><input type="tel" th:name="phone" th:value="${staffInfor.getPhone()}" /></th:block>
                         </td>
                     </tr>
                     <tr>
-                        <th>Phòng ban</th>
-                        <td><select th:name="departId">
+                        <th th:text="#{caption.Department}">Phòng ban</th>
+                        <td><p>
+                            <select th:name="departId">
                             <th:block th:if="${mode<1}"> <option selected="selected" th:value="${staffInfor.getDepartId()}"><th:block th:text="${departments.get(staffInfor.getDepartId())}" /></option> </th:block>
-                            <th:block th:each="dept: ${departments}">
-                                <option th:value="${dept.key}" th:text="${dept.value}" />
-                            </th:block>
                             <th:block th:each="dept, state : ${deptList}">
                                 <option th:value="${dept.getId()}" th:text="${dept.getName()}"/>
                             </th:block>
-                        </select></td>
+                            </select>
+                        </p></td>
 
-                        <td>Bậc</td>
+                        <th>Bậc</th>
                         <td>
                             <th:block th:if="${mode==1}"><input type="number" th:name="level" /></th:block>
                             <th:block th:if="${mode<1}"><input type="number" th:name="level"  th:value="${staffInfor.getLevel()}"/></th:block>
@@ -108,15 +116,15 @@
                             <th:block th:if="${mode<1}"><input type="number" th:name="salary" th:value="${staffInfor.getSalary()}"></th:block>
                         </td>
 
-                        <td>Ghi chú</td>
+                        <th>Ghi chú</th>
                         <td>
                             <textarea th:name="notes" ><th:block th:if="${mode<1}" th:text="${staffInfor.getNotes()}"></th:block></textarea>
                         </td>
                     </tr>
                 </tbody></table>
             </div>
+            </form>
         </div>
-        </form>
     </div>
 
 </div>

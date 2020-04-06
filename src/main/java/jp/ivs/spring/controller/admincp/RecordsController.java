@@ -77,18 +77,26 @@ public class RecordsController
         modelMap.addAttribute("pr_empMapper", employeeMapper);
         RecordHelper.prepareToNewRecord(modelMap);
         modelMap.addAttribute("mode", 1); //đặt mode new = 1 tức là Thêm
-        return "admin/recordDetail";
+          return "admin/recordDetail";
     }
-    @RequestMapping(value = {"/admincp/editRecord"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/admincp/editRecord"} )
     public String editRecord(ModelMap modelMap
-    , @RequestParam("record") Record record
+    , @RequestParam("recordNo") int recordNo
     )   {
-        modelMap.addAttribute("pr_staffNo", record.getStaffId());
+        modelMap.addAttribute("pr_staffNo", recordNo);
         modelMap.addAttribute("pr_deptMapper", departMapper);
         modelMap.addAttribute("pr_empMapper", employeeMapper);
         RecordHelper.prepareToNewRecord(modelMap);
         modelMap.addAttribute("mode", 0); //đặt mode new = 0 tức là Sửa
-        return "";
+        return "admin/recordDetail";
+    }
+    @RequestMapping(value = {"/admincp/deleteRecord"})
+    public String deleteRecord(ModelMap modelMap
+    , @RequestParam("recordNo") int recordNo
+    )   {
+        Record record = new Record();
+        record.setId(recordNo);
+        return updateSuccess(modelMap, record, -1);
     }
     @RequestMapping(value = {"/admincp/recordSuccess"}, method = RequestMethod.POST)
     public String updateSuccess(ModelMap modelMap
@@ -101,7 +109,6 @@ public class RecordsController
             record.getDate();
 //            recordMapper.addRecord(record);
         }
-
         return allRecords(modelMap);
     }
 }

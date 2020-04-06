@@ -45,7 +45,7 @@
                 <th:block th:if="${listRecords.size()>0}">
                     <thead>
                     <tr>
-                        <th th:utext="#{caption.IndexonList}"/>
+                        <th th:text="#{caption.IndexonList}"/>
                         <th th:text="#{lb.recordType}"></th>
                         <th th:text="#{caption.reason}"></th>
                         <th th:text="#{lb.recordDate}"></th>
@@ -59,34 +59,39 @@
                     </tr>
                     </thead>
                     <tbody><th:block th:if="${listRecords!=null}">
-                    <th:block th:each="record, state : ${listRecords}">
+                    <th:block th:each="recordLine, state : ${listRecords}">
                         <tr class="odd gradeX">
-                            <td class="center"><form action="/admincp/editRecords" method="post">
-                                <input type="hidden" hidden="hidden" th:name="recordNo" th:value="${record.getKey()}" />
+                            <td class="center"><form action="/admincp/editRecord" >
+                                <input type="hidden" hidden="hidden" name="recordNo" th:value="${recordLine.getKey()}" />
                                 <button><th:block th:text="${state.count}" /></button>
                             </form></td>
                             <td class="center"  >
-                                <th:block th:if="${record.getValue().getType()} == true" ><span><th:block th:text="#{lb.bonUp}" /></span></th:block>
-                                <th:block th:if="${record.getValue().getType()} == false" ><span><th:block th:text="#{lb.dislaw}" /></span></th:block>
+                                <th:block th:if="${recordLine.getValue().getType()} == true" ><span><th:block th:text="#{lb.bonUp}" /></span></th:block>
+                                <th:block th:if="${recordLine.getValue().getType()} == false" ><span><th:block th:text="#{lb.dislaw}" /></span></th:block>
                             </td>
                             <td class="center" >
-                                <span><th:block th:text="${record.getValue().getReason()}"/></span>
+                                <span><th:block th:text="${recordLine.getValue().getReason()}"/></span>
                             </td>
-                            <td class="center"> <span><th:block th:text="${#dates.format(record.getValue().date, 'dd-MM-yyyy')}"/>
+                            <td class="center"> <span><th:block th:text="${#dates.format(recordLine.getValue().date, 'dd-MM-yyyy')}"/>
                             </span> </td>
                             <td class="center"><span><form action="/admincp/records" method="post">
-                                <input type="hidden" hidden="hidden" th:name="empNo" th:value="${record.getValue().getStaffNo()}"/>
+                                <input type="hidden" hidden="hidden" th:name="empNo" th:value="${recordLine.getValue().getStaffNo()}"/>
                                 <button class="btn btn-outline btn-success" type="submit">
-                                    <th:block th:text="${record.getValue().getStaffName()}"></th:block></button>
+                                    <th:block th:text="${recordLine.getValue().getStaffName()}"></th:block></button>
                             </form>
                             </span></td>
                             <td class="center"><span>
-                                <th:block th:text="${record.getValue().getEmail()}"/>
+                                <th:block th:text="${recordLine.getValue().getEmail()}"/>
                             </span></td>
                             <td class="center"> <span>
-                                <th:block th:text="${record.getValue().getDepartment()}"/>
+                                <th:block th:text="${recordLine.getValue().getDepartment()}"/>
                             </span></td>
-                            <td class="center"><button class="btn btn-outline btn-danger"><th:block th:text="#{btn.drop}"/></button></td>
+                            <td class="center">
+                                <form action="/admincp/deleteRecord">
+                                    <input type="hidden" hidden="hidden" name="recordNo" th:value="${recordLine.getValue().getRecordNo()}"/>
+                                <button class="btn btn-outline btn-danger"><th:block th:text="#{btn.drop}"/></button>
+                                </form>
+                            </td>
                         </tr>
                     </th:block>
                     </th:block></tbody>

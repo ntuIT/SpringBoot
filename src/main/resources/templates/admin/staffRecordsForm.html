@@ -42,7 +42,6 @@
                     <thead>
                     <tr>
                         <th th:utext="#{caption.IndexonList}">
-                            <a href="/admincp/addRecord" class="btn btn-outline bg-info"><th:block th:text="#{btn.add}"/></a>
                          </th>
                         <th th:text="#{lb.recordType}"></th>
                         <th th:text="#{caption.reason}"></th>
@@ -54,14 +53,14 @@
                     <th:block th:each="record, state : ${listRecords}">
                         <tr class="odd gradeX">
                             <td class="center"><form action="/admincp/editRecords" method="post">
-                                <input type="hidden" hidden="hidden" th:name="recordNo" th:value="${record.getKey()}" />
+                                <input type="hidden" hidden="hidden" th:name="id" th:value="${record.getKey()}" />
                                 <button><th:block th:text="${state.count}" /></button>
                             </form></td>
-                            <td class="center"  >
+                            <td class="center">
                                 <th:block th:if="${record.getValue().getType()} == true" ><span><th:block th:text="#{lb.bonUp}" /></span></th:block>
                                 <th:block th:if="${record.getValue().getType()} == false" ><span><th:block th:text="#{lb.dislaw}" /></span></th:block>
                             </td>
-                            <td class="center" >
+                            <td class="center">
                                 <span><textarea><th:block th:text="${record.getValue().getReason()}"/></textarea></span>
                             </td>
                             <td class="center"> <span><th:block th:text="${#dates.format(record.getValue().date, 'dd-MM-yyyy')}"/>

@@ -12,7 +12,7 @@ public class Record
     int id, staffId;
     boolean type;
     String reason;
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date date;
 
     //region hàm tạo()
