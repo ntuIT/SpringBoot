@@ -1,7 +1,7 @@
-package jp.ivs.spring.mapper;
+package spring.mapper;
 
-import jp.ivs.spring.model.RecordDetail;
-import jp.ivs.spring.model.admin.Record;
+import spring.model.RecordDetail;
+import spring.model.admin.Record;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -35,16 +35,17 @@ public interface RecordMapper
     boolean addRecord(Record record);
 
     public final String UPDATE_COMMON = " UPDATE bookstore.records t SET ";
-    public final String TYPE_UPDATE = " t.Type = #{type} ";
-    public final String REASON_UPDATE = " t.Reason = #{reason} ";
-    public final String DATE_UPDATE = " t.Date = #{date} ";
-    public final String STAFF_UPDATE = " t.StaffId = #{staffId} ";
-    public final String FULL_UPDATE = TYPE_UPDATE + " , " + REASON_UPDATE + " , " + DATE_UPDATE + " , " + STAFF_UPDATE;
-    public final String UPDATE_CONDITION = " WHERE t.Id = #{Id}; ";
-    @Update(UPDATE_COMMON + FULL_UPDATE + UPDATE_CONDITION)
+    public final String TYPE_SET = " t.Type = #{type} ";
+    public final String REASON_SET = " t.Reason = #{reason} ";
+    public final String DATE_SET = " t.Date = #{date} ";
+    public final String STAFF_SET = " t.StaffId = #{staffId} ";
+    public final String FULL_SET = TYPE_SET + " , " + REASON_SET + " , " + DATE_SET + " , " + STAFF_SET;
+    public final String UPDATE_CONDITION = " WHERE t.Id = #{id}; ";
+    @Update(UPDATE_COMMON + FULL_SET + UPDATE_CONDITION)
     boolean editRecord(Record record);
 
     @Delete("DELETE FROM bookstore.records WHERE Id = #{recordNo}")
     boolean dropRecord(int recordNo);
     //endregion thêm xóa sửa
+
 }

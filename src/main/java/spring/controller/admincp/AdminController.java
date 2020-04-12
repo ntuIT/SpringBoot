@@ -1,9 +1,11 @@
-package jp.ivs.spring.controller.admincp;
+package spring.controller.admincp;
 
-import jp.ivs.spring.mapper.DepartMapper;
-import jp.ivs.spring.mapper.EmployeeMapper;
-import jp.ivs.spring.model.admin.Department;
-import jp.ivs.spring.model.admin.Employee;
+import spring.mapper.DepartMapper;
+import spring.mapper.EmployeeMapper;
+import spring.model.admin.Department;
+import spring.model.admin.Employee;
+import spring.mapper.UserMapper;
+import spring.model.admin.UserAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,8 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import jp.ivs.spring.mapper.UserMapper;
-import jp.ivs.spring.model.admin.UserAdmin;
+
 
 @Controller
 @RequestMapping("/admincp")
@@ -48,14 +49,11 @@ public class AdminController
     , @RequestParam("email") String user
     , @RequestParam("password") String pass)
     {
-        List<UserAdmin> list = userMapper.getAllUser();
-        for (UserAdmin admin : list)
+        UserAdmin userAdmin = userMapper.getUser(user);
+        if (userAdmin.getPassword().equals(pass))
         {
-            if (admin.getUsername().equals(user) && admin.getPassword().equals(pass))
-            {
-                model.addAttribute("adminName", admin.getFullName());
-                return goToAdmin(model);
-            }
+            model.addAttribute("adminName", userAdmin.getFullName());
+            return goToAdmin(model);
         }
         return goToLogin(model);
     }

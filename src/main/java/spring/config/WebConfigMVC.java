@@ -1,4 +1,4 @@
-package jp.ivs.spring.config;
+package spring.config;
 
 import ch.qos.logback.core.pattern.Converter;
 import org.springframework.context.MessageSource;
@@ -38,6 +38,7 @@ implements WebMvcConfigurer
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        lci.setHttpMethods("GET", "POST");
         lci.setParamName("lang");
         return lci;
     }

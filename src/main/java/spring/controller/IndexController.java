@@ -1,7 +1,7 @@
-package jp.ivs.spring.controller;
+package spring.controller;
 
-import jp.ivs.spring.mapper.RecordMapper;
-import jp.ivs.spring.model.RecordDetail;
+import spring.mapper.RecordMapper;
+import spring.model.RecordDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -1,4 +1,6 @@
-package jp.ivs.spring.model;
+package spring.model;
+
+import spring.model.admin.Record;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -8,14 +10,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecordDetail
+public class RecordDetail extends Record
 {
     int recordNo, staffNo, departNo;
-    boolean type; Date date;
+    boolean type;
+    Date date;
     String reason, staffName, email, department;
 
     //region các hàm tạo()
-    public RecordDetail() { }
+    public RecordDetail() {
+        recordNo = super.id;
+        staffNo = super.staffId;
+        date = super.date;
+        type = super.type;
+        reason = super.reason;
+    }
+    public RecordDetail(int recordNo)
+    {
+        this.recordNo = recordNo;
+    }
     public RecordDetail(int recordNo, boolean type, String reason, Date date, int staffNo, String email)
     {
         this.recordNo = recordNo;
@@ -41,10 +54,14 @@ public class RecordDetail
     public boolean getType() { return type; }
     public void setType(boolean type) { this.type = type; }
 
-    public Date getDate() { return date; }
+    @Override
+    public Date getDate() { return this.date; }
+    @Override
     public void setDate(Date date) { this.date = date; }
 
-    public String getReason() { return reason; }
+    @Override
+    public String getReason() { return this.reason; }
+    @Override
     public void setReason(String reason) { this.reason = reason; }
 
     public String getStaffName() { return staffName; }

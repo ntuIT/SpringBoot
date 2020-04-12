@@ -50,23 +50,26 @@
                     </tr>
                     </thead>
                     <tbody><th:block th:if="${listRecords!=null}">
-                    <th:block th:each="record, state : ${listRecords}">
+                    <th:block th:each="recordLine, state : ${listRecords}">
                         <tr class="odd gradeX">
-                            <td class="center"><form action="/admincp/editRecords" method="post">
-                                <input type="hidden" hidden="hidden" th:name="id" th:value="${record.getKey()}" />
+                            <td class="center"><form action="/admincp/editRecord" >
+                                <input type="hidden" hidden="hidden" name="recordNo" th:value="${recordLine.getKey()}" />
                                 <button><th:block th:text="${state.count}" /></button>
                             </form></td>
                             <td class="center">
-                                <th:block th:if="${record.getValue().getType()} == true" ><span><th:block th:text="#{lb.bonUp}" /></span></th:block>
-                                <th:block th:if="${record.getValue().getType()} == false" ><span><th:block th:text="#{lb.dislaw}" /></span></th:block>
+                                <th:block th:if="${recordLine.getValue().getType()} == true" ><span><th:block th:text="#{lb.bonUp}" /></span></th:block>
+                                <th:block th:if="${recordLine.getValue().getType()} == false" ><span><th:block th:text="#{lb.dislaw}" /></span></th:block>
                             </td>
                             <td class="center">
-                                <span><textarea><th:block th:text="${record.getValue().getReason()}"/></textarea></span>
+                                <span><textarea><th:block th:text="${recordLine.getValue().getReason()}"/></textarea></span>
                             </td>
-                            <td class="center"> <span><th:block th:text="${#dates.format(record.getValue().date, 'dd-MM-yyyy')}"/>
+                            <td class="center"> <span><th:block th:text="${#dates.format(recordLine.getValue().date, 'dd-MM-yyyy')}"/>
                             </span> </td>
 
-                            <td class="center"><button class="btn btn-outline btn-danger"><th:block th:text="#{btn.drop}"/></button></td>
+                            <td class="center"><form action="/admincp/deleteRecord">
+                                <input type="hidden" hidden="hidden" name="recordNo" th:value="${recordLine.getValue().getRecordNo()}"/>
+                                <button class="btn btn-outline btn-danger"><th:block th:text="#{btn.drop}"/></button>
+                            </form></td>
                         </tr>
                     </th:block>
                     </th:block></tbody>
@@ -85,17 +88,41 @@
 
     <div class="row">
 
-        <!-- /.col-lg-6 -->
+
         <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Staff Record Statistic
-                </div>
-                <!-- /.panel-body -->
+            <div class="row">
+
+                <div class="col-lg-5"><div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="flot-chart">
+                            <div class="flot-chart-content" id="flot-line-chart-moving" style="padding: 0px; position: relative;"><canvas class="flot-base" width="470" height="397" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 473.318px; height: 399.984px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div class="flot-tick-label tickLabel" style="position: absolute; top: 361px; left: 34px; text-align: right;">0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 297px; left: 27px; text-align: right;">20</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 234px; left: 27px; text-align: right;">40</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 171px; left: 27px; text-align: right;">60</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 107px; left: 27px; text-align: right;">80</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 44px; left: 21px; text-align: right;">100</div></div></div><canvas class="flot-overlay" width="470" height="397" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 473.318px; height: 399.984px;"></canvas></div>
+                        </div>
+                    </div>
+                </div></div>
+
+                <div class="col-lg-7"><div class="panel panel-primary">
+                    <div class="panel-body">
+                    <div class="table-responsive"><table class="table">
+                        <thead>
+                        <ul class="nav nav-pills">
+                            <li class="active"><a href="#home-pills" data-toggle="tab" aria-expanded="true">Home</a>
+                            </li>
+                            <li class=""><a href="#profile-pills" data-toggle="tab" aria-expanded="false">Profile</a>
+                            </li>
+                            <li class=""><a href="#messages-pills" data-toggle="tab" aria-expanded="false">Messages</a>
+                            </li>
+                            <li class=""><a href="#settings-pills" data-toggle="tab" aria-expanded="false">Settings</a>
+                            </li>
+                        </ul>
+                        </thead>
+                        <tbody>segertg</tbody>
+                    </table></div>
+                    </div>
+                </div></div>
             </div>
-            <!-- /.panel -->
+
         </div>
-        <!-- /.col-lg-6 -->
+
     </div>
 
     <!-- /.row -->

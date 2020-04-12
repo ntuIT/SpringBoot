@@ -1,16 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2020 at 06:24 PM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.6
+-- Generation Time: Apr 12, 2020 at 08:33 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+07:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,21 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bookstore`
+-- Database: `groot`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `book`
---
-
-CREATE TABLE `book` (
-  `book_id` int(11) NOT NULL,
-  `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `author` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -49,33 +35,17 @@ CREATE TABLE `departs` (
 --
 -- Dumping data for table `departs`
 --
+ALTER TABLE `departs`
+  ADD PRIMARY KEY (`Id`);
+ALTER TABLE `departs`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 INSERT INTO `departs` (`Id`, `Name`) VALUES
 (0, NULL),
-(1, 'IVS'),
+(1, 'Dpt'),
 (2, 'NTU'),
 (3, 'JAV..A');
 
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `recorddetails`
--- (See below for the actual view)
---
-CREATE TABLE `recorddetails` (
-`RecordNo` int(11)
-,`Type` bit(1)
-,`Reason` varchar(255)
-,`Date` date
-,`StaffNo` int(11)
-,`StaffName` varchar(255)
-,`Contact` text
-,`Email` text
-,`DepartNo` int(11)
-,`Department` varchar(128)
-);
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `records`
@@ -89,28 +59,26 @@ CREATE TABLE `records` (
   `StaffId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `records`
---
+ALTER TABLE `records`
+  ADD PRIMARY KEY (`Id`);
+ALTER TABLE `records`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+COMMIT;
 
 INSERT INTO `records` (`Id`, `Type`, `Reason`, `Date`, `StaffId`) VALUES
-(1, NULL, 'đăng ký cho vui', '2020-03-26', NULL),
-(2, b'0', 'thích', '2010-03-26', 0),
-(3, b'1', 'test ', '2020-03-28', 2),
-(4, b'1', 'test 4', '2020-02-02', 4),
-(5, b'1', 'test 5', '2020-02-29', 2),
-(6, b'1', 'test 6', '2020-02-28', 2),
-(7, b'1', 'test 7', '2018-02-18', 4),
-(9, b'0', 'tháng tư là lời nói dối của em', '2020-04-30', 4),
-(10, b'0', 'điệp viên Sáu Thiệu', '2020-04-02', 4),
-(11, b'0', 'corona', '2020-02-02', 4),
-(12, b'0', 'bow` troy` is Blue, coin coo is Black, lomb nack is Brown', '2019-02-19', 2);
+(0, NULL, 'đăng ký cho vui', '2020-03-26', NULL),
+(1, b'0', 'thích', '2010-03-26', 0),
+(2, b'1', 'test ', '2020-03-28', 2),
+(3, b'1', 'test 4', '2020-02-02', 4),
+(4, b'1', 'test 5', '2020-02-29', 2),
+(5, b'1', 'test 6', '2020-02-28', 2),
+(6, b'1', 'test 7', '2018-02-18', 4),
+(7, b'0', 'tháng tư là lời nói dối của em', '2020-04-30', 4),
+(8, b'0', 'điệp viên Sáu Thiệu', '2020-04-02', 4),
+(9, b'0', 'corona', '2020-02-02', 4),
+(10, b'0', 'bow` troy` is Blue, coin coo is Black, lomb nack is Brown', '2019-02-19', 2);
 
--- --------------------------------------------------------
 
---
--- Table structure for table `staffs`
---
 
 CREATE TABLE `staffs` (
   `Id` int(11) NOT NULL,
@@ -126,22 +94,24 @@ CREATE TABLE `staffs` (
   `DepartId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `staffs`
---
+ALTER TABLE `staffs`
+  ADD PRIMARY KEY (`Id`);
+ALTER TABLE `staffs`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+COMMIT;
 
 INSERT INTO `staffs` (`Id`, `Name`, `Gender`, `Birthday`, `Photo`, `Email`, `Phone`, `Salary`, `Level`, `Notes`, `DepartId`) VALUES
-(0, 'Trang Hạ', b'0', NULL, 's0.psd', 'trangha75@yahoo.com', 'trangha.vn', 1234, 3, 'Nụ cười cô gái năm ấy', 3),
-(1, 'IVS', NULL, NULL, 'IVS Co.Ltd.psd', '*@indivisys.jp', '(+84)-28-3526-1435', NULL, 0, 'PTHoa and 7Plus', 1),
+(0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3),
+(1, 'Company', NULL, NULL, 'Co.Ltd;.psd', '*@indivisys.jp', '(+84)', NULL, 0, 'Hạt muối hạt vàng, phải chia dân làng, lòng Dít đau như cắt, nước mắt đầm đìa', 1),
 (2, 'Thọ MC', b'0', NULL, 'thomc.psd', 'thomc@ntu', '0258 3831 149', NULL, 1, 'trainer', 2),
-(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3),
-(4, 'Huấn Rose', b'0', '1984-01-01', 'Rose.psd', 'captain@', '()', 9, 3, 'Không làm mà đòi có ăn thì ăn đầu buồi, ăn cứt', 0),
+(4, 'Huấn Rose', b'1', '1984-01-01', 'Rose.psd', 'captain@', '()', 9, 3, 'Không làm mà đòi có ăn thì ăn đầu buồi, ăn cứt', 0),
 (5, 'trainee 1', b'0', NULL, '1.psd', 'luongngando@', '+84', 1000, 4, 'học viên 1 (nv cty)', 1),
 (6, 'trainee 2', b'1', NULL, '2.psd', ' ', ' ', NULL, 2, 'học viên 2 (fresher)', 1),
 (7, 'trainee n', NULL, NULL, 'anymous.psd', NULL, NULL, 2, NULL, ' ', 2),
 (8, 'staff8', NULL, NULL, 'photo8', 'staff8@mail', '123', 1234, NULL, ' ', 1),
 (9, 'staff9', b'0', NULL, 'staff9.psd', 'staff9@', '()', 345, 0, ' ', 2),
-(10, 'Duy Mạnh', b'1', '1975-05-22', '10_ThienManh.psd', NULL, '0989026282', NULL, NULL, 'Vợ con anh Mạnh khỏe', 3);
+(10, 'Duy Mạnh', b'1', '1975-05-22', '10_ThienManh.psd', NULL, '0989026282', NULL, NULL, 'Vợ con anh Mạnh khỏe', 3),
+(15, 'Trang Hạ', b'0', NULL, 's0.psd', 'trangha75@yahoo.com', 'trangha.vn', 1234, 3, 'Nụ cười cô gái năm ấy', 3);
 
 -- --------------------------------------------------------
 
@@ -156,86 +126,24 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `users`
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`Username`);
 --
 
 INSERT INTO `users` (`Username`, `Password`, `Fullname`) VALUES
-('IVS', 'admin', 'công ty lầy'),
 ('root', 'root', NULL),
-('thomcntu', 'ntu', 'Mai Cường Thọ'),
-('vubanh', 'captain', 'PTHV');
+('U23', 'admin', 'Hải quay xe');
 
--- --------------------------------------------------------
 
---
--- Structure for view `recorddetails`
---
-DROP TABLE IF EXISTS `recorddetails`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`groot`@`localhost` SQL SECURITY DEFINER VIEW `recorddetails`  AS  select `r`.`Id` AS `RecordNo`,`r`.`Type` AS `Type`,`r`.`Reason` AS `Reason`,`r`.`Date` AS `Date`,`r`.`StaffId` AS `StaffNo`,`s`.`Name` AS `StaffName`,`s`.`Phone` AS `Contact`,`s`.`Email` AS `Email`,`s`.`DepartId` AS `DepartNo`,`d`.`Name` AS `Department` from (`records` `r` left join (`staffs` `s` left join `departs` `d` on(`s`.`DepartId` = `d`.`Id`)) on(`s`.`Id` = `r`.`StaffId`)) ;
+CREATE   VIEW `recorddetails`
+ AS  select `r`.`Id` AS `RecordNo`,`r`.`Type` AS `Type`,`r`.`Reason` AS `Reason`,`r`.`Date` AS `Date`,`r`.`StaffId` AS `StaffNo`,`s`.`Name` AS `StaffName`,`s`.`Phone` AS `Contact`,`s`.`Email` AS `Email`,`s`.`DepartId` AS `DepartNo`,`d`.`Name` AS `Department`
+ from ( `records` `r`
+    left join (`staffs` `s` left join `departs` `d`
+                        on(`s`.`DepartId` = `d`.`Id`)
+        ) on(`s`.`Id` = `r`.`StaffId`) ) ;
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `book`
---
-ALTER TABLE `book`
-  ADD PRIMARY KEY (`book_id`);
-
---
--- Indexes for table `departs`
---
-ALTER TABLE `departs`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `records`
---
-ALTER TABLE `records`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `staffs`
---
-ALTER TABLE `staffs`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`Username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `book`
---
-ALTER TABLE `book`
-  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `departs`
---
-ALTER TABLE `departs`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `records`
---
-ALTER TABLE `records`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `staffs`
---
-ALTER TABLE `staffs`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

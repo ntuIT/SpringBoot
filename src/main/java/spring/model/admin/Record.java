@@ -1,24 +1,33 @@
-package jp.ivs.spring.model.admin;
+package spring.model.admin;
 
+import jp.ivs.spring.model.RecordDetail;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Record
 {
-    int id, staffId;
-    boolean type;
-    String reason;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    Date date;
+    protected int id, staffId;
+    protected boolean type;
+    protected String reason;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    protected Date date;
 
     //region hàm tạo()
     public Record() {}
     public Record(int rID) {
         this.id = rID;
+    }
+    public Record(RecordDetail recordDetail)
+    {
+        this.id = recordDetail.getRecordNo();
+        this.type = recordDetail.getType();
+        this.reason = recordDetail.getReason();
+        this.date = recordDetail.getDate();
+        this.staffId = recordDetail.getStaffNo();
     }
     public Record(int rID, boolean type, String reason, Date date, int staffId)
     {
@@ -45,7 +54,7 @@ public class Record
 
     public void setStaffId(int staffId) { this.staffId = staffId; }
 
-    public boolean isType() { return type; }
+    public boolean getType() { return type; }
 
     public void setType(boolean type) { this.type = type;  }
 

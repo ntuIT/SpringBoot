@@ -1,4 +1,4 @@
-package jp.ivs.spring.model.admin;
+package spring.model.admin;
 
 import java.util.*;
 

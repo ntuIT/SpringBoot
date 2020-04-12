@@ -1,6 +1,6 @@
-package jp.ivs.spring.mapper;
+package spring.mapper;
 
-import jp.ivs.spring.model.admin.Employee;
+import spring.model.admin.Employee;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public interface EmployeeMapper
 
     @Select(QUERY_ALL_STAFF + " WHERE s.DepartId = #{deptId}; ")
     List<Employee> getStaffsListForDept(int deptId);
-    @Select(QUERY_ALL_STAFF + " WHERE s.Name LIKE CONCAT('%',#{staffName},'% ');")
+    @Select(QUERY_ALL_STAFF + " WHERE s.Name LIKE CONCAT('%',#{staffName},'%'); ")
     List<Employee> getStaffsListForName(String staffName);
 
     final String GET_SEARCH_STAFF = QUERY_ALL_STAFF

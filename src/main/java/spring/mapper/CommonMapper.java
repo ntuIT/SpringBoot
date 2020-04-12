@@ -1,4 +1,4 @@
-package jp.ivs.spring.mapper;
+package spring.mapper;
 
 import org.apache.ibatis.annotations.Select;
 

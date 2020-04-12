@@ -1,7 +1,7 @@
-package jp.ivs.spring.controller;
+package spring.controller;
 
-import jp.ivs.spring.mapper.DepartMapper;
-import jp.ivs.spring.model.admin.Department;
+import spring.mapper.DepartMapper;
+import spring.model.admin.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

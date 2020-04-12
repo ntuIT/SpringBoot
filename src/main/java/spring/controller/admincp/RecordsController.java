@@ -68,7 +68,7 @@ public class RecordsController
         return "foward: /admincp/success";
     }
     @RequestMapping(value = {"/admincp/addRecord"}, method = RequestMethod.POST)
-    public String addRecord(ModelMap modelMap
+    public String formAddRecord(ModelMap modelMap
 //    , @RequestParam("mode") int mode
     , @ModelAttribute Employee staff
     )   {
@@ -80,22 +80,21 @@ public class RecordsController
           return "admin/recordDetail";
     }
     @RequestMapping(value = {"/admincp/editRecord"} )
-    public String editRecord(ModelMap modelMap
+    public String formEditRecord(ModelMap modelMap
     , @RequestParam("recordNo") int recordNo
     )   {
-        modelMap.addAttribute("pr_staffNo", recordNo);
+        modelMap.addAttribute("recordLine", new Record(recordMapper.get1Record(recordNo)));
         modelMap.addAttribute("pr_deptMapper", departMapper);
         modelMap.addAttribute("pr_empMapper", employeeMapper);
-        RecordHelper.prepareToNewRecord(modelMap);
-        modelMap.addAttribute("mode", 0); //đặt mode new = 0 tức là Sửa
+        RecordHelper.prepareToModifyRecord(modelMap);
+        modelMap.addAttribute("mode", 0); //đặt mode = 0 tức là Sửa
         return "admin/recordDetail";
     }
     @RequestMapping(value = {"/admincp/deleteRecord"})
     public String deleteRecord(ModelMap modelMap
     , @RequestParam("recordNo") int recordNo
     )   {
-        Record record = new Record();
-        record.setId(recordNo);
+        Record record = new Record(recordMapper.get1Record(recordNo));
         return updateSuccess(modelMap, record, -1);
     }
     @RequestMapping(value = {"/admincp/recordSuccess"}, method = RequestMethod.POST)
@@ -103,11 +102,14 @@ public class RecordsController
     , @ModelAttribute Record record
     , @RequestParam("mode") int mode
     )   {
-        if (mode ==-1) {}
-        if (mode == 0) {}
+        if (mode ==-1) {
+            recordMapper.dropRecord(record.getId());
+        }
+        if (mode == 0) {
+            recordMapper.editRecord(record);
+        }
         if (mode == 1) {
-            record.getDate();
-//            recordMapper.addRecord(record);
+            recordMapper.addRecord(record);
         }
         return allRecords(modelMap);
     }

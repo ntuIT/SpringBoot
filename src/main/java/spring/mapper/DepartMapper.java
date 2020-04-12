@@ -1,4 +1,4 @@
-package jp.ivs.spring.mapper;
+package spring.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 import java.util.Map;
 
-import jp.ivs.spring.model.admin.Department;
+import spring.model.admin.Department;
 import org.apache.ibatis.annotations.Update;
 
 public interface DepartMapper

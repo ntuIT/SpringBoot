@@ -37,6 +37,8 @@
                     <form action="#" th:action="@{/admincp/recordSuccess}" th:object="${record}" method="post">
                     <thead><tr role="row">
                         <th>
+<!--đối với mode 1 nghĩa là New: không đổ gì thêm
+ngược lại nếu mode khác 1 nghĩa là Update: đổ data lên các field cần thiết, những field này ở mode 1=New sẽ để trống-->
                             <th:block th:if="${mode}==1">
     <input name="mode" th:value="${mode}" type="hidden" hidden="hidden"/>
     <button><th:block th:utext="#{btn.add}"/></button>
@@ -53,13 +55,19 @@
                         <th th:text="#{caption.detailInfor}"/>
                     </tr></thead>
                     <tbody class="table"><div class="table-responsive">
-                            <tr>
-                                <td><select th:name="type">
-                                    <th:block th:replace="common_layout/comboboxLayout :: cbbTypeRecord" />
-                                </select></td>
-                                <td><textarea th:name="reason"></textarea></td>
+                            <tr><div class="hidden"><input type="hidden" hidden="hidden" th:name="id" th:value="${recordLine.getId()}"/>/div>
                                 <td>
-                                    <input type="date" th:name="date" th:value="${#dates.format(null, 'dd-MM-yyyy')}"/>
+                                    <select th:name="type" th:if="${mode<1}" th:value="${recordLine.type}">
+                                        <th:block th:replace="common_layout/comboboxLayout :: cbbTypeRecord" />
+                                    </select>
+                                    <select th:name="type" th:unless="${mode<1}">
+                                        <th:block th:replace="common_layout/comboboxLayout :: cbbTypeRecord" />
+                                    </select>
+                                </td>
+                                <td><textarea th:name="reason"><th:block th:if="${mode < 1}" th:utext="${recordLine.getReason()}"/></textarea></td>
+                                <td>
+                                    <th:block th:if="${mode < 1}"><input type="date" th:name="date" th:value="${recordLine.date}"/></th:block>
+                                    <th:block th:if="${mode ==1}"><input type="date" th:name="date" /></th:block>
                                 </td>
                                 <td><select th:name="staffId">
                                     <option selected="selected" th:value="${empDetail.id}"><th:block th:utext="${empDetail.name}"/></option>
