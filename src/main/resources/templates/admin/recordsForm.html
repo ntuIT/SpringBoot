@@ -11,7 +11,7 @@
 <nav th:replace="admin/adminLayout :: amNav"></nav>
 <!--endregion-->
 
-<div id="page-wrapper">
+<div id="page-wrapper"  style = "padding-left: 0px;">
     <!--
     <div class="row">
         <div class="col-lg-12">
@@ -66,7 +66,7 @@
                                 <button><th:block th:text="${state.count}" /></button>
                             </form></td>
                             <td class="center"  >
-                                <th:block th:if="${recordLine.getValue().getType()} == true" ><span><th:block th:text="#{lb.bonUp}" /></span></th:block>
+                                <th:block th:if="${recordLine.getValue().getType()} == true" ><span><th:block th:text="#{lb.glorify}" /></span></th:block>
                                 <th:block th:if="${recordLine.getValue().getType()} == false" ><span><th:block th:text="#{lb.dislaw}" /></span></th:block>
                             </td>
                             <td class="center" >
@@ -87,7 +87,7 @@
                                 <th:block th:text="${recordLine.getValue().getDepartment()}"/>
                             </span></td>
                             <td class="center">
-                                <form action="/admincp/deleteRecord">
+                                <form action="/admincp/deleteRecord" method="post">
                                     <input type="hidden" hidden="hidden" name="recordNo" th:value="${recordLine.getValue().getRecordNo()}"/>
                                     <button class="btn btn-outline btn-danger"><th:block th:text="#{btn.drop}"/></button>
                                 </form>

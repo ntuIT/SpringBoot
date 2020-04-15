@@ -18,9 +18,11 @@ public class RecordHelper {
     CommonMapper commonMapper;
 
     //các query dùng với JDBC
-    public static final String _COUNT_ALL_FELI_ = " select count(*) as 'total' from recorddetails r left join staffs s on s.Id = r.StaffNo where not(r.Type is true) and s.Id = ? ";
-
-    public static final String _COUNT_ALL_CRITI_ = " select count(*) as 'total' from recorddetails r left join staffs s on s.Id = r.StaffNo where r.Type is true and s.Id = ? ";
+    public static final String _COUNT_ALL_FELI_ = " select count(*) as 'Total' from recorddetails r left join staffs s on s.Id = r.StaffNo where not(r.Type is true) and s.Id = ? ";
+    public static final String _COUNT_ALL_CRITI_ = " select count(*) as 'Total' from recorddetails r left join staffs s on s.Id = r.StaffNo where r.Type is true and s.Id = ? ";
+    public static final String _COUNT_bothRecord_BY_YEAR_= " select count(*) as 'Total' from recorddetails r left join staffs s on s.Id = r.StaffNo " +
+        "where r.Type is ? and s.Id = ? and YEAR(r.Date) = ? "; //type = true/false, Id = int, year = int
+    //
 
     public static void initModelMap(ModelMap modelMap, DepartMapper departMapper)
     {
@@ -41,18 +43,20 @@ public class RecordHelper {
         Map recordList = RecordDetail.castList2Map( recordMapper.getRecordsByStaff(staffNo));
         modelMap.addAttribute("listRecords", recordList);
         EmployeeMapper employeeMapper = (EmployeeMapper) modelMap.get("pr_empMapper");
-        modelMap.addAttribute("empDetail",  employeeMapper.get1StaffByNo(staffNo));
+
 
         try {
             Connection connection = CommonDbHelper.getMySQLConnection();
-            PreparedStatement statement = connection.prepareStatement(_COUNT_ALL_FELI_, staffNo);
-            ResultSet result1 = statement.executeQuery(); result1.next();
-            int totalFeli = result1.getInt("total");
+            PreparedStatement statement = connection.prepareStatement(_COUNT_ALL_FELI_);
+            statement.setInt(1, staffNo);
+            ResultSet result = statement.executeQuery(); result.next();
+            int totalFeli = result.getInt("Total");
             modelMap.addAttribute("lauCount",totalFeli);
-            result1.close(); statement.close();
-            statement = connection.prepareStatement(_COUNT_ALL_CRITI_, staffNo);
-            result1 = statement.executeQuery(); result1.next();
-            int totalCriti = result1.getInt("total");
+            result.close(); statement.close();
+            statement = connection.prepareStatement(_COUNT_ALL_CRITI_);
+            statement.setInt(1, staffNo);
+            result = statement.executeQuery(); result.next();
+            int totalCriti = result.getInt("Total");
             modelMap.addAttribute("critiCount", totalCriti);
             connection.close();
         } catch (SQLException e) {

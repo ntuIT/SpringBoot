@@ -1,11 +1,11 @@
-package jp.ivs.spring.controller.admincp;
+package spring.controller.admincp;
 
-import jp.ivs.spring.mapper.DepartMapper;
-import jp.ivs.spring.mapper.EmployeeMapper;
-import jp.ivs.spring.mapper.RecordMapper;
-import jp.ivs.spring.model.RecordHelper;
-import jp.ivs.spring.model.admin.Employee;
-import jp.ivs.spring.model.admin.Record;
+import spring.mapper.DepartMapper;
+import spring.mapper.EmployeeMapper;
+import spring.mapper.RecordMapper;
+import spring.model.RecordHelper;
+import spring.model.admin.Employee;
+import spring.model.admin.Record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import jp.ivs.spring.model.RecordDetail;
+import spring.model.RecordDetail;
 
 @Controller
 public class RecordsController
@@ -58,15 +58,10 @@ public class RecordsController
         modelMap.addAttribute("pr_empMapper", employeeMapper);
         modelMap.addAttribute("pr_recordMapper", recordMapper);
         RecordHelper.groupByRecordMap(modelMap);
+        modelMap.addAttribute("empDetail",  employeeMapper.get1StaffByNo(staffNo));
         return "admin/staffRecordsForm";
     }
 
-    @RequestMapping(value = {"/admincp/newRecord"} )
-    public String addForm(ModelMap modelMap
-    , @RequestParam("mode") int mode
-    )   {
-        return "foward: /admincp/success";
-    }
     @RequestMapping(value = {"/admincp/addRecord"}, method = RequestMethod.POST)
     public String formAddRecord(ModelMap modelMap
 //    , @RequestParam("mode") int mode
@@ -90,7 +85,7 @@ public class RecordsController
         modelMap.addAttribute("mode", 0); //đặt mode = 0 tức là Sửa
         return "admin/recordDetail";
     }
-    @RequestMapping(value = {"/admincp/deleteRecord"})
+    @RequestMapping(value = {"/admincp/deleteRecord"} , method = RequestMethod.POST)
     public String deleteRecord(ModelMap modelMap
     , @RequestParam("recordNo") int recordNo
     )   {

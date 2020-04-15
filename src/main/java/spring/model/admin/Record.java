@@ -1,6 +1,6 @@
 package spring.model.admin;
 
-import jp.ivs.spring.model.RecordDetail;
+import spring.model.RecordDetail;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;

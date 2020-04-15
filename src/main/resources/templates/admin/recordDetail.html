@@ -55,7 +55,10 @@ ngược lại nếu mode khác 1 nghĩa là Update: đổ data lên các field 
                         <th th:text="#{caption.detailInfor}"/>
                     </tr></thead>
                     <tbody class="table"><div class="table-responsive">
-                            <tr><div class="hidden"><input type="hidden" hidden="hidden" th:name="id" th:value="${recordLine.getId()}"/>/div>
+                            <tr>
+                                <th:block th:if="${recordLine}!=null">
+                                    <div class="hidden"><input type="hidden" hidden="hidden" th:name="id" th:value="${recordLine.getId()}"/></div>
+                                </th:block>
                                 <td>
                                     <select th:name="type" th:if="${mode<1}" th:value="${recordLine.type}">
                                         <th:block th:replace="common_layout/comboboxLayout :: cbbTypeRecord" />

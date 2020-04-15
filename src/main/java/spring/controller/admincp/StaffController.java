@@ -1,9 +1,9 @@
-package jp.ivs.spring.controller.admincp;
+package spring.controller.admincp;
 
-import jp.ivs.spring.mapper.DepartMapper;
-import jp.ivs.spring.mapper.EmployeeMapper;
-import jp.ivs.spring.model.admin.Department;
-import jp.ivs.spring.model.admin.Employee;
+import spring.mapper.DepartMapper;
+import spring.mapper.EmployeeMapper;
+import spring.model.admin.Department;
+import spring.model.admin.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

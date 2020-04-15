@@ -43,12 +43,14 @@
             <div class="panel-heading">
                 <form action="/admincp/staff" >
                     <div class="navbar-left>">
-                        <input name="empName" type="text" class="form-control-static" th:placeholder="#{lb.empName}" />
-                        <button type="submit"><th:block th:text="#{btn.Search}" /></button>
+                        <div class="input-group custom-search-form">
+                            <input name="empName" type="text" class="form-control-static" th:placeholder="#{lb.empName}" />
+                            <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>
+                        </div>
                     </div>
 
                     <div class = "navbar-right" style = " margin-right: fill; margin-top: -15px; "> <th:block th:text="#{caption.Department}" />
-                        <select  name="deptNo">
+                        <select name="deptNo">
                             <option th:value="-1" th:text="--"/>
                             <th:block th:each="dept, state : ${listDepts}">
                                 <option th:value="${dept.getId()}" th:text="${dept.getName()}"/>
