@@ -1,5 +1,8 @@
 package spring.model.admin;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +22,7 @@ public class Employee
 
     //region Hàm Tạo()
     public Employee() { }
+    public Employee(int id) {   this.id = id;   }
     public Employee(int id, String name)
     {
         this.id = id;
@@ -97,5 +101,25 @@ public class Employee
             map.put(i.getId(), i);
         }
         return map;
+    }
+
+    public static List parse2List(ResultSet resultSet) throws SQLException {
+        List<Employee> list = new ArrayList<>();
+        while (resultSet.next())
+        {
+            Employee employee = new Employee(resultSet.getInt("Id"));
+            employee.setName(resultSet.getString("Name"));
+            employee.setGender(resultSet.getInt("Gender"));
+            employee.setBirthday(resultSet.getDate("Birthday"));
+            employee.setPhoto(resultSet.getString("Photo"));
+            employee.setEmail(resultSet.getString("Email"));
+            employee.setPhone(resultSet.getString("Phone"));
+            employee.setSalary(resultSet.getInt("Salary"));
+            employee.setLevel(resultSet.getInt("Level"));
+            employee.setNotes(resultSet.getString("Notes"));
+            employee.setDepartId(resultSet.getInt("DepartId"));
+            list.add(employee);
+        }
+        return list;
     }
 }

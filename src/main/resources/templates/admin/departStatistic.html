@@ -17,18 +17,22 @@
     </div>
 
     <div class="row">
-        <th:block>
+        <th:block th:each="dept, state : ${departments}">
         <div class="col-lg-4"><div class="panel panel-default">
-            <div class="panel-heading">Tên phòng ban</div>
+            <div class="panel-heading">
+                <label><th:block th:utext="#{caption.Department}"></th:block> :
+                    <th:block th:utext='${dept.get("deptName")}'/>
+                    (<th:block th:utext='${dept.get("laudRecords") + dept.get("critRecords")}'/> records)</label>
+            </div>
             <div class="panel-body">
                 <div class="list-group">
                     <div class="list-group-item">
                         <span>Tổng điểm khen thưởng</span>
-                        <span class="pull-right"></span>
+                        <span class="pull-right"><th:block th:utext='${dept.get("laudRecords")}' /></span>
                     </div>
                     <div class="list-group-item">
                         <span>Tổng số phê bình</span>
-                        <span class="pull-right"></span>
+                        <span class="pull-right"><th:block th:utext='${dept.get("critRecords")}' /></span>
                     </div>
                     <div class="list-group-item">
                         <span>Năm cao nhất</span>
@@ -41,7 +45,12 @@
 
                 </div>
                 <div class="form-group">
-                    <label>Số người: </label>
+                    <label>Số người có biểu mẫu:<th:block th:utext='${dept.get("empList").size()}'/></label>
+                    <th:block th:if='${dept.get("empList").size()>0}'><select multiple="" class="form-control">
+                        <th:block th:each='empLine : ${dept.get("empList")}'>
+                            <option><th:block th:utext='${empLine.getName()}' /></option>
+                        </th:block>
+                    </select></th:block>
                 </div>
             </div>
         </div></div>

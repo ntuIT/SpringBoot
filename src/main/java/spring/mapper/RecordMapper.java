@@ -1,5 +1,6 @@
 package spring.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import spring.model.RecordDetail;
 import spring.model.admin.Record;
 import org.apache.ibatis.annotations.Delete;
@@ -22,6 +23,9 @@ public interface RecordMapper
     public static final String NORMAL = " not(Type is null) "; //điều kiện cơ bản lọc ra những record không bị lỗi
     @Select("SELECT * FROM recorddetails WHERE " +NORMAL+ " AND DepartNo = #{deptNo} ORDER BY Date DESC;")
     List<RecordDetail> getRecordsByDept(int deptNo); //lấy những bản có chung Dept
+    @Select("SELECT COUNT(RecordNo) FROM recorddetails WHERE " +NORMAL+ " AND Type = #{type} AND DepartNo = #{deptNo} ")
+    int countRecordByDept(@Param("type") boolean type , @Param("deptNo") int deptNo);
+
     @Select("SELECT * FROM recorddetails where " +NORMAL+ " AND DepartNo = #{deptNo} ORDER BY Date DESC limit 10")
     List<RecordDetail> get10SortByDept(int deptNo); //lấy 10 bản đầu tiên cùng Dept
 
